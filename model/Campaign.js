@@ -15,6 +15,10 @@ const CampaignSchema = new Schema(
       required: true,
       min: 20,
     },
+    image: {
+         type:String,
+         required: true
+    },
     summary: {
       // Tóm tắt
       type: String,
