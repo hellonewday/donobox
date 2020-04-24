@@ -3,6 +3,9 @@ const Comment = require("../model/Comment");
 const User = require("../model/User");
 const cloudinary = require("cloudinary").v2;
 const config = require("config");
+const moment = require("moment");
+
+moment.locale("vi");
 
 cloudinary.config({
   cloud_name: config.get("cloud_name"),
@@ -12,32 +15,359 @@ cloudinary.config({
 
 module.exports.getCams = (req, res, next) => {
   if (Object.keys(req.query).length === 0 && req.query.constructor === Object) {
-    Campaign.find().exec((error, doc) => {
-      if (error) return res.status(400).json({ success: false, error });
-      return res.status(200).json({
-        counts: res.length,
-        data: doc,
+    Campaign.find()
+      .populate({
+        path: "comments",
+        select: "email name contents created_at",
+      })
+      .populate({
+        path: "host",
+        select: "email avatarUrl location name",
+      })
+      .exec((error, doc) => {
+        if (error) return res.status(400).json({ success: false, error });
+        return res.status(200).json({
+          counts: res.length,
+          data: doc.map((item) => {
+            return {
+              id: item._id,
+              time: {
+                start: moment(item.start_time).format("LL"),
+                end: moment(item.end_time).format("LL"),
+              },
+              created_at: moment(item.created_at).fromNow(),
+              interactions: {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                shares: item.shares,
+              },
+              comments: item.comments.map((comment) => {
+                return {
+                  id: comment._id,
+                  email: comment.email,
+                  name: comment.name,
+                  content: comment.contents,
+                  created_at: moment(comment.created_at).fromNow(),
+                };
+              }),
+              isPublished: item.isPublished,
+              name: item.name,
+              summary: item.summary,
+              type: item.campaign_type,
+              segment: item.location_type,
+              genre: item.genre,
+              description: item.description,
+              host: item.host,
+              image: item.image,
+            };
+          }),
+        });
       });
-    });
-  } else if (req.query.top) {
-    console.log(req.query);
-    return res.status(200).send("Top");
-  } else if (req.query.limit) {
-    console.log(req.query);
-    return res.status(200).send("Limit");
+  } else if (req.query.city) {
+    Campaign.find({ location: req.query.city })
+      .populate({
+        path: "comments",
+        select: "email name contents created_at",
+      })
+      .populate({
+        path: "host",
+        select: "email avatarUrl location name",
+      })
+      .exec((error, doc) => {
+        if (error) return res.status(400).json({ success: false, error });
+        return res.status(200).json({
+          counts: res.length,
+          data: doc.map((item) => {
+            return {
+              id: item._id,
+              time: {
+                start: item.start_time,
+                end: item.end_time,
+              },
+              created_at: moment(item.created_at).fromNow(),
+              interactions: {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                shares: item.shares,
+              },
+              comments: item.comments.map((comment) => {
+                return {
+                  id: comment._id,
+                  email: comment.email,
+                  name: comment.name,
+                  content: comment.contents,
+                  created_at: moment(comment.created_at).fromNow(),
+                };
+              }),
+              isPublished: item.isPublished,
+              name: item.name,
+              summary: item.summary,
+              type: item.campaign_type,
+              segment: item.location_type,
+              genre: item.genre,
+              description: item.description,
+              host: item.host,
+              image: item.image,
+            };
+          }),
+        });
+      });
+  } else if (req.query.search) {
+    Campaign.find({ name: { $regex: req.query.search, $options: "i" } })
+      .populate({
+        path: "comments",
+        select: "email name contents created_at",
+      })
+      .populate({
+        path: "host",
+        select: "email avatarUrl location name",
+      })
+      .exec((error, doc) => {
+        if (error) return res.status(400).json({ success: false, error });
+        return res.status(200).json({
+          counts: res.length,
+          data: doc.map((item) => {
+            return {
+              id: item._id,
+              created_at: moment(item.created_at).fromNow(),
+
+              time: {
+                start: item.start_time,
+                end: item.end_time,
+              },
+              interactions: {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                shares: item.shares,
+              },
+              comments: item.comments.map((comment) => {
+                return {
+                  id: comment._id,
+                  email: comment.email,
+                  name: comment.name,
+                  content: comment.contents,
+                  created_at: moment(comment.created_at).fromNow(),
+                };
+              }),
+              isPublished: item.isPublished,
+              name: item.name,
+              summary: item.summary,
+              type: item.campaign_type,
+              segment: item.location_type,
+              genre: item.genre,
+              description: item.description,
+              host: item.host,
+              image: item.image,
+            };
+          }),
+        });
+      });
+  } else if (req.query.popular) {
+    Campaign.find()
+      .populate({
+        path: "comments",
+        select: "email name contents created_at",
+      })
+      .populate({
+        path: "host",
+        select: "email avatarUrl location name",
+      })
+      .limit(parseInt(req.query.popular))
+      .sort({ likes: -1 })
+      .exec((error, doc) => {
+        if (error) return res.status(400).json({ success: false, error });
+        return res.status(200).json({
+          counts: res.length,
+          data: doc.map((item) => {
+            return {
+              id: item._id,
+              time: {
+                start: item.start_time,
+                end: item.end_time,
+              },
+              created_at: moment(item.created_at).fromNow(),
+
+              interactions: {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                shares: item.shares,
+              },
+              comments: item.comments.map((comment) => {
+                return {
+                  id: comment._id,
+                  email: comment.email,
+                  name: comment.name,
+                  content: comment.contents,
+                  created_at: moment(comment.created_at).fromNow(),
+                };
+              }),
+              isPublished: item.isPublished,
+              name: item.name,
+              summary: item.summary,
+              type: item.campaign_type,
+              segment: item.location_type,
+              genre: item.genre,
+              description: item.description,
+              host: item.host,
+              image: item.image,
+            };
+          }),
+        });
+      });
+  } else if (req.query.start) {
+    Campaign.find()
+      .populate({
+        path: "comments",
+        select: "email name contents created_at",
+      })
+      .populate({
+        path: "host",
+        select: "email avatarUrl location name",
+      })
+      .sort({ start_time: parseInt(req.query.start) })
+      .exec((error, doc) => {
+        if (error) return res.status(400).json({ success: false, error });
+        return res.status(200).json({
+          counts: res.length,
+          data: doc.map((item) => {
+            return {
+              id: item._id,
+              time: {
+                start: item.start_time,
+                end: item.end_time,
+              },
+              created_at: moment(item.created_at).fromNow(),
+
+              interactions: {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                shares: item.shares,
+              },
+              comments: item.comments.map((comment) => {
+                return {
+                  id: comment._id,
+                  email: comment.email,
+                  name: comment.name,
+                  content: comment.contents,
+                  created_at: moment(comment.created_at).fromNow(),
+                };
+              }),
+              isPublished: item.isPublished,
+              name: item.name,
+              summary: item.summary,
+              type: item.campaign_type,
+              segment: item.location_type,
+              genre: item.genre,
+              description: item.description,
+              host: item.host,
+              image: item.image,
+            };
+          }),
+        });
+      });
+  } else if (req.query.end) {
+    Campaign.find()
+      .populate({
+        path: "comments",
+        select: "email name contents created_at",
+      })
+      .populate({
+        path: "host",
+        select: "email avatarUrl location name",
+      })
+      .sort({ end_time: parseInt(req.query.end) })
+      .exec((error, doc) => {
+        if (error) return res.status(400).json({ success: false, error });
+        return res.status(200).json({
+          counts: res.length,
+          data: doc.map((item) => {
+            return {
+              id: item._id,
+              time: {
+                start: item.start_time,
+                end: item.end_time,
+              },
+              created_at: moment(item.created_at).fromNow(),
+
+              interactions: {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                shares: item.shares,
+              },
+              comments: item.comments.map((comment) => {
+                return {
+                  id: comment._id,
+                  email: comment.email,
+                  name: comment.name,
+                  content: comment.contents,
+                  created_at: moment(comment.created_at).fromNow(),
+                };
+              }),
+              isPublished: item.isPublished,
+              name: item.name,
+              summary: item.summary,
+              type: item.campaign_type,
+              segment: item.location_type,
+              genre: item.genre,
+              description: item.description,
+              host: item.host,
+              image: item.image,
+            };
+          }),
+        });
+      });
   }
 };
 
 module.exports.getCam = (req, res, next) => {
-  Campaign.findOne({ _id: req.params.id }).exec((error, doc) => {
-    if (error)
-      return res
-        .status(400)
-        .json({ success: false, message: "No campaign found" });
-    return res.status(200).json({
-      data: doc,
+  Campaign.findOne({ _id: req.params.id })
+    .populate({
+      path: "comments",
+      select: "email name contents created_at",
+    })
+    .populate({
+      path: "host",
+      select: "email avatarUrl location name",
+    })
+    .exec((error, doc) => {
+      if (error)
+        return res
+          .status(400)
+          .json({ success: false, message: "No campaign found", error });
+      return res.status(200).json({
+        data: {
+          id: doc._id,
+          time: {
+            start: doc.start_time,
+            end: doc.end_time,
+          },
+          created_at: moment(doc.created_at).fromNow(),
+          interactions: {
+            likes: doc.likes,
+            dislikes: doc.dislikes,
+            shares: doc.shares,
+          },
+          comments: doc.comments.map((comment) => {
+            return {
+              id: comment._id,
+              email: comment.email,
+              name: comment.name,
+              content: comment.contents,
+              created_at: moment(comment.created_at).fromNow(),
+            };
+          }),
+          isPublished: doc.isPublished,
+          name: doc.name,
+          summary: doc.summary,
+          type: doc.campaign_type,
+          segment: doc.location_type,
+          genre: doc.genre,
+          description: doc.description,
+          host: doc.host,
+          image: doc.image,
+        },
+      });
     });
-  });
 };
 
 module.exports.createCam = (req, res, next) => {
