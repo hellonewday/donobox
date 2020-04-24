@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import DataSlider from "./DataSlider";
 import divider from "../../img/divider.png";
+import Button from "@material-ui/core/Button";
+import "../../App.css";
 
 class NearYou extends Component {
   render() {
@@ -21,6 +23,9 @@ class NearYou extends Component {
           }}
         />
         <DataSlider />
+        <Button className="button-more">
+          Xem thêm
+        </Button>
       </div>
     );
   }

@@ -17,13 +17,6 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: 3,
     fontWeight: 600,
   },
-  button: {
-    background: "linear-gradient(#4ea2e3,#1684d9)",
-    color: "white",
-    fontWeight: 600,
-    padding: 10,
-    margin: 10,
-  },
 }));
 
 export default function Nabar() {
@@ -36,7 +29,7 @@ export default function Nabar() {
           backgroundColor: "white",
           borderBottom: "1px solid gainsboro",
         }}
-        position="static"
+        position="fixed"
       >
         <Toolbar>
           <img width={60} style={{ padding: 10 }} src={logo} alt="logo" />
@@ -48,10 +41,13 @@ export default function Nabar() {
               Các chương trình
             </Typography>
             <Typography variant="h6" className="menu-item">
+              COVID - 19
+            </Typography>
+            <Typography variant="h6" className="menu-item">
               Về chúng tôi
             </Typography>
-            <Button variant="contained" className={classes.button}>
-              Become a donor
+            <Button variant="contained" className="button-search">
+              Đăng ký tài trợ
             </Button>
           </div>
         </Toolbar>

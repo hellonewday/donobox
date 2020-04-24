@@ -3,11 +3,11 @@
 }
 
 .menu-item {
-  color: #005ba1;
-  font-weight: 400;
-  padding: 10px;
-  margin-top: 10px;
-  font-size: 18px;
+  color: #005ba1 !important;
+  font-weight: 400 !important;
+  font-size: 18px !important;
+  padding: 5px !important;
+  margin: 20px !important;
 }
 
 @media only screen and (max-width: 600px) {
@@ -15,20 +15,44 @@
     display: none;
   }
   .search-title {
-    font-size: 20px;
+    font-size: 22px;
     text-align: center;
+    color: white;
+    font-weight: 400;
+    text-shadow: 1px 1px white;
   }
+
   .search-input {
     font-size: 10px;
   }
   .search-input {
     text-align: center;
   }
+  .card-box {
+    max-width: 300px;
+  }
+  .search-desc {
+    color: white;
+    text-align: center;
+    font-size: 17px;
+    text-shadow: 1px 1px white;
+  }
+  .button-search {
+    padding: 8px !important;
+    font-size: 10px !important;
+  }
+  .social-block {
+    display: block !important;
+  }
+  .tips-container {
+    display: block !important;
+  }
 }
 
 .search-title {
-  text-shadow: 2px 1px black;
+  text-shadow: 1px 1px black;
   text-transform: uppercase;
+  color: black;
 }
 
 .search-input {
@@ -45,4 +69,62 @@
 
 .card-box {
   max-width: 380px;
+}
+
+.button-search {
+  background: linear-gradient(#4ea2e3, #1684d9);
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 10px !important;
+  margin: 10px !important;
+}
+
+.button-more {
+  margin-left: auto !important;
+  display: block !important;
+  margin-right: auto !important;
+  margin-top: 50px !important;
+  background: linear-gradient(#4ea2e3, #1684d9) !important;
+  padding: 10px 30px !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.menu-item:hover {
+  border: 1px solid #1684d9;
+  border-radius: 5px;
+  transition: all 0.4s;
+}
+
+.social {
+  margin: 40px 0;
+  padding: 60px;
+  background: gainsboro;
+}
+
+.social-button {
+  padding: 10px 24px !important;
+  margin: 10px !important;
+}
+
+.social-block {
+  width: 50% !important;
+  display: block;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.tips-box {
+  max-width: 500px;
+  margin: 20px;
+}
+
+.tips-container {
+  display: flex !important;
+  justify-content: space-around;
+}
+
+.contact-paper {
+  margin: 10px;
+  padding: 10px;
 }
