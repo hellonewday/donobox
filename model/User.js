@@ -6,7 +6,6 @@ const UserSchema = new Schema(
     // Tên doanh nghiệp
     name: {
       type: String,
-      required: true,
       trim: true,
       min: 3,
     },
@@ -41,6 +40,10 @@ const UserSchema = new Schema(
       type: String,
       trim: true,
       min: 10,
+    },
+    isAdmin: {
+         type: Boolean,
+         default: false
     },
     // Số điện thoại
     phoneNumber: {
