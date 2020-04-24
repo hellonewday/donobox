@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cors = require("cors");
 const port = process.env.PORT || 8000;
 
 const users = require("./routes/users");
@@ -20,6 +21,7 @@ mongoose.connect(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use("/", express.static(__dirname));
 
