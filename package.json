@@ -17,11 +17,15 @@
   "bugs": {
     "url": "https://github.com/hellonewday/donobox/issues"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.21.0",
     "express": "^4.17.1",
+    "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.10",
     "multer": "^1.4.2"
