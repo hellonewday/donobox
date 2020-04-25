@@ -12,8 +12,49 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import Axios from "axios";
 
 class CreateCam extends Component {
+  state = {};
+
+  handleFileChange = (e) => {
+    this.setState({ [e.target.name]: e.target.files[0] });
+  };
+
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+    let fd = new FormData();
+    fd.append("name", this.state.name);
+    fd.append("summary", this.state.summary);
+    fd.append("campaign_type", this.state.campaign_type);
+    fd.append("genre", this.state.genre);
+    fd.append("end_time", this.state.end_time);
+    fd.append("location_type", this.state.location_type);
+    fd.append("location", this.state.location || "");
+    fd.append("description", this.state.description);
+    fd.append("picture", this.state.picture);
+
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+        Authorization: window.localStorage.getItem("token"),
+      },
+    };
+    console.log(fd);
+    Axios.post("https://donobox.herokuapp.com/api/campaigns", fd, config)
+      .then((response) => {
+        if (response.data.success) alert("Đăng chiến dịch thành công. ");
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+        if (!error.response.data.success) alert("Đã có lỗi xảy ra");
+      });
+  };
   render() {
     return (
       <Container>
@@ -24,6 +65,8 @@ class CreateCam extends Component {
               <TextField
                 fullWidth
                 id="standard-basic"
+                name="name"
+                onChange={this.handleChange}
                 variant="outlined"
                 label="Tên chiến dịch"
               />
@@ -33,6 +76,8 @@ class CreateCam extends Component {
                 fullWidth
                 id="standard-basic"
                 label="Tóm tắt chiến dịch"
+                onChange={this.handleChange}
+                name="summary"
                 variant="outlined"
               />
             </Grid>{" "}
@@ -40,14 +85,15 @@ class CreateCam extends Component {
             <Grid item xs={12} lg={12} style={{ marginBottom: 20 }}>
               <CKEditor
                 editor={ClassicEditor}
-                data="<p>Mô tả chiến dịch của bạn!</p>"
+                name="description"
+                data=""
                 onInit={(editor) => {
                   // You can store the "editor" and use when it is needed.
                   console.log("Editor is ready to use!", editor);
                 }}
                 onChange={(event, editor) => {
                   const data = editor.getData();
-                  console.log({ event, editor, data });
+                  this.setState({ description: data });
                 }}
                 onBlur={(event, editor) => {
                   console.log("Blur.", editor);
@@ -67,6 +113,7 @@ class CreateCam extends Component {
                 }}
                 type="file"
                 name="picture"
+                onChange={this.handleFileChange}
               />
             </Grid>
             <Grid item xs={8} lg={4}>
@@ -79,7 +126,9 @@ class CreateCam extends Component {
                 <Select
                   labelId="loai-chien-dich"
                   id="loai-chien-dich"
-                  value={"Từ thiện"}
+                  value={this.state.campaign_type || ""}
+                  name="campaign_type"
+                  onChange={this.handleChange}
                 >
                   <MenuItem value={"Từ thiện"}>Từ thiện</MenuItem>
                   <MenuItem value={"Hỗ trợ nhà nước"}>
@@ -95,7 +144,13 @@ class CreateCam extends Component {
                 }}
               >
                 <InputLabel id="the-loai">Giá trị hỗ trợ</InputLabel>
-                <Select labelId="the-loai" id="the-loai" value={"Lương thực"}>
+                <Select
+                  labelId="the-loai"
+                  id="the-loai"
+                  value={this.state.genre || ""}
+                  name="genre"
+                  onChange={this.handleChange}
+                >
                   <MenuItem value={"Lương thực"}>Lương thực</MenuItem>
                   <MenuItem value={"Giáo dục"}>Giáo dục</MenuItem>
                   <MenuItem value={"Việc làm"}>Việc làm</MenuItem>
@@ -111,13 +166,18 @@ class CreateCam extends Component {
                 }}
               >
                 <InputLabel id="doi-tuong">Đối tượng hướng tới</InputLabel>
-                <Select labelId="doi-tuong" id="doi-tuong" value={"Toàn quốc"}>
+                <Select
+                  fullWidth 
+                  value={this.state.location_type || ""}
+                  name="location_type"
+                  onChange={this.handleChange}
+                  labelId="doi-tuong"
+                  id="doi-tuong"
+                >
                   <MenuItem value={"Toàn quốc"}>Toàn quốc</MenuItem>
                   <MenuItem value={"Toàn cầu"}>Toàn cầu</MenuItem>
                   <MenuItem value={"Theo khu vực"}>Theo khu vực</MenuItem>
-                  <MenuItem value={"Thành phó cụ thể"}>
-                    Thành phó cụ thể
-                  </MenuItem>
+                  <MenuItem value={"Thành phố"}>Thành phó cụ thể</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -127,15 +187,19 @@ class CreateCam extends Component {
                 id="location"
                 label="Chi tiết về địa điểm"
                 variant="outlined"
+                name="location"
+                onChange={this.handleChange}
               />
             </Grid>
             <Grid item sx={12} lg={6} style={{ marginBottom: 20 }}>
               <TextField
                 fullWidth
+                name="start_time"
                 id="start_time"
                 label="Thời gian bắt đầu"
                 type="date"
                 defaultValue={Date.now()}
+                onChange={this.handleChange}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -144,10 +208,11 @@ class CreateCam extends Component {
             <Grid item sx={12} lg={6}>
               <TextField
                 fullWidth
-                id="end_time"
+                name="end_time"
                 label="Thời gian kết thúc"
                 type="date"
                 defaultValue="2022-05-24"
+                onChange={this.handleChange}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -155,10 +220,14 @@ class CreateCam extends Component {
             </Grid>
           </Grid>
           <ButtonGroup fullWidth style={{ marginBottom: 20 }}>
-            <Button  type="submit" color="secondary" variant="contained">
+            <Button
+              onClick={this.handleSubmit}
+              color="secondary"
+              variant="contained"
+            >
               Đăng
             </Button>
-            <Button  color="default">Hủy đăng</Button>
+            <Button color="default">Hủy đăng</Button>
           </ButtonGroup>
         </form>
       </Container>

@@ -3,8 +3,17 @@ import DataSlider from "./DataSlider";
 import divider from "../../img/divider.png";
 import Button from "@material-ui/core/Button";
 import "../../App.css";
+import Axios from "axios";
 
 class Popular extends Component {
+  state = {
+    data: [],
+  };
+  componentDidMount() {
+    Axios.get(`https://donobox.herokuapp.com/api/campaigns`)
+      .then((response) => this.setState({ data: response.data.data }))
+      .catch((error) => console.log(error.response));
+  }
   render() {
     return (
       <div style={{ marginTop: 40 }}>
@@ -22,7 +31,7 @@ class Popular extends Component {
             marginBottom: 6,
           }}
         />
-        <DataSlider />
+        <DataSlider data={this.state.data} />
         <Button className="button-more">Xem thêm</Button>
       </div>
     );

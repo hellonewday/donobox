@@ -11,6 +11,7 @@ import Showcase from "./components/showcase/Showcase";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import EditCams from "./components/EditCams";
+import Detail from "./components/Detail";
 
 class Routes extends Component {
   render() {
@@ -19,11 +20,12 @@ class Routes extends Component {
         <Navbar />
         <Switch>
           <Route exact path="/" component={(props) => <Home />} />
-          <Route path="/contact" component={(props) => <Contact />} />
+          <Route path={"/contact"} component={(props) => <Contact />} />
           <Route path="/covid" component={(props) => <Tips />} />
           <Route path="/auth" component={(props) => <Account />} />
           <Route path="/create" component={(props) => <CreateCam />} />
           <Route path="/campaigns" component={(props) => <Showcase />} />
+          <Route path="/campaign/:id" component={Detail} />
           <Route path="/profile/:id" component={Profile} />
           <Route path="/edit/profile/:id" component={EditProfile} />
           <Route path="/edit/campaigns/:id" component={EditCams} />

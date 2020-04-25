@@ -14,6 +14,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../App.css";
+import Item from "../Item";
 
 export default class DataSlider extends Component {
   render() {
@@ -38,181 +39,15 @@ export default class DataSlider extends Component {
     return (
       <Container fixed>
         <Slider {...settings}>
-          <div>
-            <Card className="card-box">
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  height="140"
-                  image={rice}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary" variant="outlined">
-                  <FacebookIcon /> Chia sẻ
-                </Button>
-                <Button size="small" color="secondary">
-                  Tìm hiểu thêm
-                </Button>
-              </CardActions>
-            </Card>
-          </div>
-          <div>
-            <Card className="card-box">
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  height="140"
-                  image={rice}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary" variant="outlined">
-                  <FacebookIcon /> Chia sẻ
-                </Button>
-                <Button size="small" color="secondary">
-                  Tìm hiểu thêm
-                </Button>
-              </CardActions>
-            </Card>
-          </div>
-          <div>
-            <Card className="card-box">
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  height="140"
-                  image={rice}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary" variant="outlined">
-                  <FacebookIcon /> Chia sẻ
-                </Button>
-                <Button size="small" color="secondary">
-                  Tìm hiểu thêm
-                </Button>
-              </CardActions>
-            </Card>
-          </div>
-          <div>
-            <Card className="card-box">
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  height="140"
-                  image={rice}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary" variant="outlined">
-                  <FacebookIcon /> Chia sẻ
-                </Button>
-                <Button size="small" color="secondary">
-                  Tìm hiểu thêm
-                </Button>
-              </CardActions>
-            </Card>
-          </div>
-          <div>
-            <Card className="card-box">
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  height="140"
-                  image={rice}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Lizard
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" color="primary" variant="outlined">
-                  <FacebookIcon /> Chia sẻ
-                </Button>
-                <Button size="small" color="secondary">
-                  Tìm hiểu thêm
-                </Button>
-              </CardActions>
-            </Card>
-          </div>
+          {this.props.data
+            ? this.props.data.map((item) => {
+                return (
+                  <div>
+                    <Item data={item} isControl={false} />
+                  </div>
+                );
+              })
+            : ""}
         </Slider>
       </Container>
     );

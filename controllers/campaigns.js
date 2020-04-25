@@ -536,7 +536,7 @@ module.exports.getCam = (req, res, next) => {
           .json({ success: false, message: "No campaign found", error });
       return res.status(200).json({
         data: {
-          id: doc._id,
+          id: doc.id,
           time: {
             start: doc.start_time,
             end: doc.end_time,
@@ -613,10 +613,6 @@ module.exports.updateCam = async (req, res, next) => {
       .status(400)
       .json({ success: false, message: "Campaign not found" });
 
-  if (isValid.host.toString() !== req.user._id.toString())
-    return res
-      .status(401)
-      .json({ message: "You are not allowed to do this action" });
   if (req.file) {
     const buffer = Buffer.from(req.file.buffer);
     const base64String = buffer.toString("base64");

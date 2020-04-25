@@ -29,7 +29,7 @@
     text-align: center;
   }
   .card-box {
-    max-width: 300px;
+    margin: 30px;
   }
   .card-showcase {
     max-width: 300px;
@@ -50,6 +50,15 @@
   }
   .social-block {
     display: block !important;
+  }
+  .info {
+    display: block !important;
+  }
+  .post-info {
+    display: block !important;
+  }
+  .user-info {
+    width: fit-content !important;
   }
 }
 
@@ -72,7 +81,8 @@
 }
 
 .card-box {
-  max-width: 380px;
+  max-width: 400px;
+  margin: 10px;
 }
 
 .card-showcase {
@@ -107,6 +117,11 @@
 
 .social-button {
   padding: 10px 24px !important;
+  margin: 10px !important;
+}
+
+.interaction-button {
+  padding: 8px 12px !important;
   margin: 10px !important;
 }
 
@@ -201,4 +216,79 @@ body {
 
 .image img {
   width: 200px;
+}
+
+/* Detail */
+.post-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info {
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  background-color: whitesmoke;
+}
+
+.type-badge {
+  border-color: blue;
+  border: 2px solid blue;
+  width: fit-content;
+  background: rgba(0, 40, 219, 0.8);
+}
+
+.genre-badge {
+  border-color: goldenrod;
+  border: 2px solid goldenrod;
+  width: fit-content;
+  background: rgba(204, 134, 4, 0.8);
+}
+
+.location-badge {
+  border-color: green;
+  border: 2px solid green;
+  width: fit-content;
+  background: rgba(0, 99, 27, 0.8);
+}
+
+.badge-info {
+  display: flex;
+}
+
+.badge {
+  color: white;
+
+  padding: 3px 20px;
+  margin-right: 10px;
+  font-weight: 600;
+  font-size: 12px;
+  border-radius: 100px;
+}
+
+.badge:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.info-text {
+  margin-left: 20px;
+}
+
+.user-info img {
+  border-radius: 100%;
+}
+
+.comments-part {
+  margin-bottom: 20px;
+}
+
+.comment-item {
+  background-color: whitesmoke;
+  width: 60%;
+  padding: 10px 20px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
 }

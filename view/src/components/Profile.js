@@ -4,6 +4,7 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import Item from "./Item";
 class Profile extends Component {
   state = {
     data: [],
@@ -15,6 +16,7 @@ class Profile extends Component {
       .then((response) => {
         this.setState({ data: response.data.data });
         console.log(this.state.data);
+        console.log(this.state.data.campaigns.length);
       })
       .catch((error) => console.log(error.response));
   }
@@ -47,7 +49,7 @@ class Profile extends Component {
           <Grid container spacing={2}>
             <Grid item xs={12} xl={4}>
               <div style={{ textAlign: "center" }}>
-                <div class="image">
+                <div className="image">
                   <img src={this.state.data.avatarUrl} />
                 </div>
                 <div class="upload-btn-wrapper">
@@ -89,7 +91,13 @@ class Profile extends Component {
             </Grid>
             <Grid item xs={12} xl={8}>
               <h3>Danh sách các chương trình</h3>
-              Nhà tài trợ chưa đăng chiến dịch nào
+              <Grid container spacing={3}>
+                {this.state.data && this.state.data.campaigns
+                  ? this.state.data.campaigns.map((item) => {
+                      return <Item data={item} isControl={true} />;
+                    })
+                  : "Nhà tài trợ chưa đăng chiến dịch nào"}
+              </Grid>
             </Grid>
           </Grid>
         ) : (
