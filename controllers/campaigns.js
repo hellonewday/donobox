@@ -64,7 +64,7 @@ module.exports.getCams = (req, res, next) => {
         });
       });
   } else if (req.query.city) {
-    Campaign.find({ location: req.query.city })
+    Campaign.find({ location: { $regex: req.query.city, $options: "i" } })
       .populate({
         path: "comments",
         select: "email name contents created_at",

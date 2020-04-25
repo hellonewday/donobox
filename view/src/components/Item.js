@@ -21,7 +21,7 @@ const Item = ({ data, isControl }) => {
           height="140"
           image={data.image}
           title="Contemplative Reptile"
-          style={{ maxWidth: 340 }}
+          style={{ maxWidth: 400 }}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

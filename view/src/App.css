@@ -83,6 +83,8 @@
 .card-box {
   max-width: 400px;
   margin: 10px;
+  min-height: 330px;
+  max-height: 400px;
 }
 
 .card-showcase {

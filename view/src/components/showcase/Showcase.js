@@ -21,16 +21,32 @@ import SearchIcon from "@material-ui/icons/Search";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 import "../../App.css";
+import Axios from "axios";
+import Item from "../Item";
 
 class Showcase extends Component {
   state = {
     filter: "male",
+    data: [],
   };
   handleFilter = (event) => {
     this.setState({ filter: event.target.value });
     console.log(event.target.name);
     console.log(event.target.value);
+    Axios.get(
+      `https://donobox.herokuapp.com/api/campaigns?${event.target.name}=${event.target.value}`
+    )
+      .then((response) => this.setState({ data: response.data.data }))
+      .catch((error) => console.log(error));
   };
+  handleLocation = (event) => {
+    console.log()
+  };
+  componentDidMount() {
+    Axios.get(`https://donobox.herokuapp.com/api/campaigns`)
+      .then((response) => this.setState({ data: response.data.data }))
+      .catch((error) => console.log(error.response));
+  }
   render() {
     return (
       <div>
@@ -51,7 +67,12 @@ class Showcase extends Component {
               />
               <br />
               <div className="search-city">
-                <TextField label="Tìm theo thành phố" variant="outlined" />
+                <TextField
+                  label="Tìm theo thành phố"
+                  name="location"
+                  onChange={this.handleLocation}
+                  variant="outlined"
+                />
                 <Button
                   style={{ height: 55 }}
                   color="primary"
@@ -161,111 +182,17 @@ class Showcase extends Component {
               spacing={3}
               style={{ marginBottom: 20, marginTop: 20 }}
             >
-              <Grid item xs={12} xl={4} lg={4}>
-                <Card className="card-showcase">
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      alt="Contemplative Reptile"
-                      height="140"
-                      image={rice}
-                      title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        Lizards are a widespread group of squamate reptiles,
-                        with over 6,000 species, ranging across all continents
-                        except Antarctica
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary" variant="outlined">
-                      <FacebookIcon /> Chia sẻ
-                    </Button>
-                    <Button size="small" color="secondary">
-                      Tìm hiểu thêm
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-              <Grid item xs={12} xl={4} lg={4}>
-                <Card className="card-showcase">
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      alt="Contemplative Reptile"
-                      height="140"
-                      image={rice}
-                      title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        Lizards are a widespread group of squamate reptiles,
-                        with over 6,000 species, ranging across all continents
-                        except Antarctica
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary" variant="outlined">
-                      <FacebookIcon /> Chia sẻ
-                    </Button>
-                    <Button size="small" color="secondary">
-                      Tìm hiểu thêm
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-              <Grid item xs={12} xl={4} lg={4}>
-                <Card className="card-showcase">
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      alt="Contemplative Reptile"
-                      height="140"
-                      image={rice}
-                      title="Contemplative Reptile"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        Lizards are a widespread group of squamate reptiles,
-                        with over 6,000 species, ranging across all continents
-                        except Antarctica
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary" variant="outlined">
-                      <FacebookIcon /> Chia sẻ
-                    </Button>
-                    <Button size="small" color="secondary">
-                      Tìm hiểu thêm
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
+              {this.state.data.length > 0 ? (
+                this.state.data.map((item) => {
+                  return (
+                    <Grid item xs={12} xl={4} lg={4}>
+                      <Item data={item} isControl={false} />
+                    </Grid>
+                  );
+                })
+              ) : (
+                <h1>Không tìm thấy sản phẩm</h1>
+              )}
             </Grid>
           </Grid>
         </Container>
