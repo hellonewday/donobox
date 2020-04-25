@@ -10,7 +10,7 @@ class Popular extends Component {
     data: [],
   };
   componentDidMount() {
-    Axios.get(`https://donobox.herokuapp.com/api/campaigns`)
+    Axios.get(`https://donobox.herokuapp.com/api/campaigns?popular=8`)
       .then((response) => this.setState({ data: response.data.data }))
       .catch((error) => console.log(error.response));
   }

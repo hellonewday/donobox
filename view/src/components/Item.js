@@ -12,6 +12,9 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { Link } from "react-router-dom";
 
 const Item = ({ data, isControl }) => {
+  const deleteCams = (id) => {
+    console.log(id);
+  };
   return (
     <Card className="card-box">
       <CardActionArea>
@@ -51,7 +54,12 @@ const Item = ({ data, isControl }) => {
             >
               <BuildIcon /> Sửa
             </Button>
-            <Button size="small" color="secondary" variant="outlined">
+            <Button
+              onClick={() => deleteCams(data._id)}
+              size="small"
+              color="secondary"
+              variant="outlined"
+            >
               <HighlightOffIcon /> Xóa
             </Button>
           </div>
@@ -61,8 +69,8 @@ const Item = ({ data, isControl }) => {
           </Button>
         )}
         <Button size="small" color="secondary">
-          <Link className="route-link" to={`/campaign/${data.id}`}>
-            Tìm hiểu thêm
+          <Link className="route-link" to={`/campaign/${data._id}`}>
+            Xem chương trình
           </Link>
         </Button>
       </CardActions>

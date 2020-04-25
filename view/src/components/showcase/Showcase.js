@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import SearchBar from "../Search";
-import rice from "../../img/rice.jpg";
 import divider from "../../img/divider.png";
 import {
   Container,
@@ -9,15 +8,6 @@ import {
   Radio,
   RadioGroup,
 } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import SearchIcon from "@material-ui/icons/Search";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 import "../../App.css";
@@ -39,8 +29,13 @@ class Showcase extends Component {
       .then((response) => this.setState({ data: response.data.data }))
       .catch((error) => console.log(error));
   };
+
   handleLocation = (event) => {
-    console.log()
+    Axios.get(
+      `https://donobox.herokuapp.com/api/campaigns?city=${event.target.value}`
+    )
+      .then((response) => this.setState({ data: response.data.data }))
+      .catch((error) => console.log(error));
   };
   componentDidMount() {
     Axios.get(`https://donobox.herokuapp.com/api/campaigns`)
@@ -73,13 +68,6 @@ class Showcase extends Component {
                   onChange={this.handleLocation}
                   variant="outlined"
                 />
-                <Button
-                  style={{ height: 55 }}
-                  color="primary"
-                  variant="contained"
-                >
-                  <SearchIcon />
-                </Button>
               </div>
               <img
                 src={divider}
@@ -99,20 +87,20 @@ class Showcase extends Component {
               >
                 <h3>Theo thời gian</h3>
                 <FormControlLabel
-                  value="newest"
-                  name="time"
+                  value="1"
+                  name="end"
                   control={<Radio />}
                   label="Mới nhất"
                 />
                 <FormControlLabel
-                  name="time"
-                  value="oldest"
+                  name="end"
+                  value="-1"
                   control={<Radio />}
                   label="Cũ nhất"
                 />
                 <FormControlLabel
-                  name="time"
-                  value="popular"
+                  value={`${this.state.data.length}`}
+                  name="popular"
                   control={<Radio />}
                   label="Phổ biến nhất"
                 />
@@ -161,13 +149,13 @@ class Showcase extends Component {
                 <h3>Theo danh mục</h3>
                 <FormControlLabel
                   value="Từ thiện"
-                  name="campaign_type"
+                  name="type"
                   control={<Radio />}
                   label="Chương trình từ thiện"
                 />
                 <FormControlLabel
                   value="Hỗ trợ nhà nước"
-                  name="campaign_type"
+                  name="type"
                   control={<Radio />}
                   label="Chương trình chính phủ"
                 />
@@ -191,7 +179,7 @@ class Showcase extends Component {
                   );
                 })
               ) : (
-                <h1>Không tìm thấy sản phẩm</h1>
+                <h2 style={{ textAlign: "center" }}>Không tìm thấy sản phẩm</h2>
               )}
             </Grid>
           </Grid>

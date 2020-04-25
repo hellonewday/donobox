@@ -4,7 +4,10 @@ const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary").v2;
+const moment = require("moment");
 const config = require("config");
+
+moment.locale("vi");
 
 cloudinary.config({
   cloud_name: config.get("cloud_name"),
@@ -13,10 +16,36 @@ cloudinary.config({
 });
 
 module.exports.getUsers = (req, res, next) => {
-  User.find().exec((err, doc) => {
-    if (err) return res.status(400).json({ error: err });
-    return res.status(200).json({ counts: doc.length, data: doc });
-  });
+  User.find()
+    .populate("campaigns")
+    .exec((err, doc) => {
+      if (err) return res.status(400).json({ error: err });
+      return res.status(200).json({
+        counts: doc.length,
+        data: doc.map((item) => {
+          return {
+            name: item.name,
+            email: item.name,
+            id: item._id,
+            avatar: item.avatarUrl,
+            campaigns: {
+              counts: item.campaigns.length,
+              campaign: item.campaigns.map((cam) => {
+                return {
+                  name: cam.name,
+                  start: moment(cam.start_time).format("LL"),
+                  end: moment(cam.end_time).format("LL"),
+                  summary: cam.summary,
+                  id: cam._id,
+                  image: cam.image,
+                };
+              }),
+            },
+            created_at: moment(item.created_at).format("LL"),
+          };
+        }),
+      });
+    });
 };
 
 module.exports.getUser = async (req, res, next) => {
@@ -24,10 +53,31 @@ module.exports.getUser = async (req, res, next) => {
   if (!isValid)
     return res.status(403).json({ message: "No user found", success: false });
   User.findOne({ _id: req.params.id })
-    .populate("campaigns")
+    .populate("campaigns name")
     .exec((err, doc) => {
       if (err) return res.status(400).json({ error: err });
-      return res.status(200).json({ data: doc });
+      return res.status(200).json({
+        data: {
+          name: doc.name,
+          email: doc.name,
+          id: doc._id,
+          avatar: doc.avatarUrl,
+          campaigns: {
+            counts: doc.campaigns.length,
+            campaign: doc.campaigns.map((cam) => {
+              return {
+                name: cam.name,
+                start: moment(cam.start_time).format("LL"),
+                end: moment(cam.end_time).format("LL"),
+                summary: cam.summary,
+                id: cam._id,
+                image: cam.image,
+              };
+            }),
+          },
+          created_at: moment(doc.created_at).format("LL"),
+        },
+      });
     });
 };
 

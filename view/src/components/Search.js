@@ -3,8 +3,31 @@ import { Container, TextField, Button } from "@material-ui/core";
 import rice from "../img/rice.jpg";
 import Typewriter from "typewriter-effect";
 import "../App.css";
+import Axios from "axios";
+import DataSlider from "./showcase/DataSlider";
 
 export default class SearchBar extends Component {
+  state = {
+    name: null,
+    data: [],
+  };
+  handleClick = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+    Axios.get(
+      `https://donobox.herokuapp.com/api/campaigns?search=${this.state.name}`
+    )
+      .then((response) => {
+        this.setState({ data: [] });
+        console.log(response.data);
+        this.setState({ data: response.data.data });
+        if (response.data.data.length === 0) alert("Không có kết quả");
+      })
+      .catch((error) => console.log(error.response));
+  };
+  handleChange = (e) => {
+    this.setState({ name: e.target.value });
+  };
   render() {
     return (
       <div
@@ -45,6 +68,8 @@ export default class SearchBar extends Component {
                 fontSize: 20,
                 border: "none",
               }}
+              onChange={this.handleChange}
+              name="name"
               className="search-input"
               fullWidth
               placeholder="Tìm kiếm chương trình hoặc thành phố bạn cần hỗ trợ"
@@ -54,9 +79,17 @@ export default class SearchBar extends Component {
               style={{ top: 10, position: "absolute", right: 10 }}
               color="primary"
               variant="contained"
+              onClick={this.handleClick}
             >
               Tìm kiếm
             </Button>
+          </div>
+          <div>
+            {this.state.data.length > 0 ? (
+              <DataSlider data={this.state.data} />
+            ) : (
+              ""
+            )}
           </div>
         </Container>
       </div>
