@@ -82,6 +82,7 @@ module.exports.loginUser = async (req, res, next) => {
         {
           _id: isValid._id,
           isAdmin: isValid.isAdmin,
+          name: isValid.name,
         },
         "s3cr3t",
         {
