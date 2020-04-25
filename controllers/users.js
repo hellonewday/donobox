@@ -89,7 +89,9 @@ module.exports.loginUser = async (req, res, next) => {
           expiresIn: "12h",
         }
       );
-      res.status(200).json({ success: true, token, id: isValid._id });
+      res
+        .status(200)
+        .json({ success: true, token, id: isValid._id, name: isValid.name });
     }
   });
 };

@@ -20,6 +20,8 @@ class Login extends Component {
         if (response.data.success) alert("Đăng nhập thành công!");
         window.localStorage.setItem("token", response.data.token);
         window.localStorage.setItem("id", response.data.id);
+        window.localStorage.setItem("name", response.data.name);
+
         console.log(response.data);
         window.location.replace("/");
       })

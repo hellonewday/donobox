@@ -45,7 +45,7 @@ export default function Nabar() {
   const handleLogout = () => {
     window.localStorage.removeItem("token");
     alert("Đăng xuất thành công");
-    window.location.reload();
+    window.location.replace("/");
   };
 
   useEffect(() => {
