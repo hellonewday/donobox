@@ -27,7 +27,7 @@ module.exports.getCams = (req, res, next) => {
       .exec((error, doc) => {
         if (error) return res.status(400).json({ success: false, error });
         return res.status(200).json({
-          counts: res.length,
+          counts: doc.length,
           data: doc.map((item) => {
             return {
               id: item._id,
@@ -76,13 +76,13 @@ module.exports.getCams = (req, res, next) => {
       .exec((error, doc) => {
         if (error) return res.status(400).json({ success: false, error });
         return res.status(200).json({
-          counts: res.length,
+          counts: doc.length,
           data: doc.map((item) => {
             return {
               id: item._id,
               time: {
-                start: item.start_time,
-                end: item.end_time,
+                start: moment(item.start_time).format("LL"),
+                end: moment(item.end_time).format("LL"),
               },
               created_at: moment(item.created_at).fromNow(),
               interactions: {
@@ -125,15 +125,15 @@ module.exports.getCams = (req, res, next) => {
       .exec((error, doc) => {
         if (error) return res.status(400).json({ success: false, error });
         return res.status(200).json({
-          counts: res.length,
+          counts: doc.length,
           data: doc.map((item) => {
             return {
               id: item._id,
               created_at: moment(item.created_at).fromNow(),
 
               time: {
-                start: item.start_time,
-                end: item.end_time,
+                start: moment(item.start_time).format("LL"),
+                end: moment(item.end_time).format("LL"),
               },
               interactions: {
                 likes: item.likes,
@@ -177,13 +177,13 @@ module.exports.getCams = (req, res, next) => {
       .exec((error, doc) => {
         if (error) return res.status(400).json({ success: false, error });
         return res.status(200).json({
-          counts: res.length,
+          counts: doc.length,
           data: doc.map((item) => {
             return {
               id: item._id,
               time: {
-                start: item.start_time,
-                end: item.end_time,
+                start: moment(item.start_time).format("LL"),
+                end: moment(item.end_time).format("LL"),
               },
               created_at: moment(item.created_at).fromNow(),
 
@@ -228,13 +228,13 @@ module.exports.getCams = (req, res, next) => {
       .exec((error, doc) => {
         if (error) return res.status(400).json({ success: false, error });
         return res.status(200).json({
-          counts: res.length,
+          counts: doc.length,
           data: doc.map((item) => {
             return {
               id: item._id,
               time: {
-                start: item.start_time,
-                end: item.end_time,
+                start: moment(item.start_time).format("LL"),
+                end: moment(item.end_time).format("LL"),
               },
               created_at: moment(item.created_at).fromNow(),
 
@@ -279,13 +279,213 @@ module.exports.getCams = (req, res, next) => {
       .exec((error, doc) => {
         if (error) return res.status(400).json({ success: false, error });
         return res.status(200).json({
-          counts: res.length,
+          counts: doc.length,
           data: doc.map((item) => {
             return {
               id: item._id,
               time: {
-                start: item.start_time,
-                end: item.end_time,
+                start: moment(item.start_time).format("LL"),
+                end: moment(item.end_time).format("LL"),
+              },
+              created_at: moment(item.created_at).fromNow(),
+
+              interactions: {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                shares: item.shares,
+              },
+              comments: item.comments.map((comment) => {
+                return {
+                  id: comment._id,
+                  email: comment.email,
+                  name: comment.name,
+                  content: comment.contents,
+                  created_at: moment(comment.created_at).fromNow(),
+                };
+              }),
+              isPublished: item.isPublished,
+              name: item.name,
+              summary: item.summary,
+              type: item.campaign_type,
+              segment: item.location_type,
+              genre: item.genre,
+              description: item.description,
+              host: item.host,
+              image: item.image,
+            };
+          }),
+        });
+      });
+  } else if (req.query.type) {
+    Campaign.find({ campaign_type: req.query.type })
+      .populate({
+        path: "comments",
+        select: "email name contents created_at",
+      })
+      .populate({
+        path: "host",
+        select: "email avatarUrl location name",
+      })
+      .exec((error, doc) => {
+        if (error) return res.status(400).json({ success: false, error });
+        return res.status(200).json({
+          counts: doc.length,
+          data: doc.map((item) => {
+            return {
+              id: item._id,
+              time: {
+                start: moment(item.start_time).format("LL"),
+                end: moment(item.end_time).format("LL"),
+              },
+              created_at: moment(item.created_at).fromNow(),
+
+              interactions: {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                shares: item.shares,
+              },
+              comments: item.comments.map((comment) => {
+                return {
+                  id: comment._id,
+                  email: comment.email,
+                  name: comment.name,
+                  content: comment.contents,
+                  created_at: moment(comment.created_at).fromNow(),
+                };
+              }),
+              isPublished: item.isPublished,
+              name: item.name,
+              summary: item.summary,
+              type: item.campaign_type,
+              segment: item.location_type,
+              genre: item.genre,
+              description: item.description,
+              host: item.host,
+              image: item.image,
+            };
+          }),
+        });
+      });
+  } else if (req.query.genre) {
+    Campaign.find({ genre: req.query.genre })
+      .populate({
+        path: "comments",
+        select: "email name contents created_at",
+      })
+      .populate({
+        path: "host",
+        select: "email avatarUrl location name",
+      })
+      .exec((error, doc) => {
+        if (error) return res.status(400).json({ success: false, error });
+        return res.status(200).json({
+          counts: doc.length,
+          data: doc.map((item) => {
+            return {
+              id: item._id,
+              time: {
+                start: moment(item.start_time).format("LL"),
+                end: moment(item.end_time).format("LL"),
+              },
+              created_at: moment(item.created_at).fromNow(),
+
+              interactions: {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                shares: item.shares,
+              },
+              comments: item.comments.map((comment) => {
+                return {
+                  id: comment._id,
+                  email: comment.email,
+                  name: comment.name,
+                  content: comment.contents,
+                  created_at: moment(comment.created_at).fromNow(),
+                };
+              }),
+              isPublished: item.isPublished,
+              name: item.name,
+              summary: item.summary,
+              type: item.campaign_type,
+              segment: item.location_type,
+              genre: item.genre,
+              description: item.description,
+              host: item.host,
+              image: item.image,
+            };
+          }),
+        });
+      });
+  } else if (req.query.segment) {
+    Campaign.find({ segment: req.query.segment })
+      .populate({
+        path: "comments",
+        select: "email name contents created_at",
+      })
+      .populate({
+        path: "host",
+        select: "email avatarUrl location name",
+      })
+      .exec((error, doc) => {
+        if (error) return res.status(400).json({ success: false, error });
+        return res.status(200).json({
+          counts: doc.length,
+          data: doc.map((item) => {
+            return {
+              id: item._id,
+              time: {
+                start: moment(item.start_time).format("LL"),
+                end: moment(item.end_time).format("LL"),
+              },
+              created_at: moment(item.created_at).fromNow(),
+
+              interactions: {
+                likes: item.likes,
+                dislikes: item.dislikes,
+                shares: item.shares,
+              },
+              comments: item.comments.map((comment) => {
+                return {
+                  id: comment._id,
+                  email: comment.email,
+                  name: comment.name,
+                  content: comment.contents,
+                  created_at: moment(comment.created_at).fromNow(),
+                };
+              }),
+              isPublished: item.isPublished,
+              name: item.name,
+              summary: item.summary,
+              type: item.campaign_type,
+              segment: item.location_type,
+              genre: item.genre,
+              description: item.description,
+              host: item.host,
+              image: item.image,
+            };
+          }),
+        });
+      });
+  } else if (req.query.verify) {
+    Campaign.find({ isPublished: parseInt(req.query.verify) })
+      .populate({
+        path: "comments",
+        select: "email name contents created_at",
+      })
+      .populate({
+        path: "host",
+        select: "email avatarUrl location name",
+      })
+      .exec((error, doc) => {
+        if (error) return res.status(400).json({ success: false, error });
+        return res.status(200).json({
+          counts: doc.length,
+          data: doc.map((item) => {
+            return {
+              id: item._id,
+              time: {
+                start: moment(item.start_time).format("LL"),
+                end: moment(item.end_time).format("LL"),
               },
               created_at: moment(item.created_at).fromNow(),
 

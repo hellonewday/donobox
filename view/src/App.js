@@ -14,11 +14,13 @@ function App() {
     <div>
       <Navbar />
       <SearchBar />
+
       <Popular />
       <NearYou />
       <Social />
       <Tips />
       <Contact />
+
       <Footer />
     </div>
   );
