@@ -25,7 +25,7 @@ module.exports.getUsers = (req, res, next) => {
         data: doc.map((item) => {
           return {
             name: item.name,
-            email: item.name,
+            email: item.email,
             id: item._id,
             avatar: item.avatarUrl,
             campaigns: {
@@ -53,13 +53,13 @@ module.exports.getUser = async (req, res, next) => {
   if (!isValid)
     return res.status(403).json({ message: "No user found", success: false });
   User.findOne({ _id: req.params.id })
-    .populate("campaigns name")
+    .populate("campaigns")
     .exec((err, doc) => {
       if (err) return res.status(400).json({ error: err });
       return res.status(200).json({
         data: {
           name: doc.name,
-          email: doc.name,
+          email: doc.email,
           id: doc._id,
           avatar: doc.avatarUrl,
           campaigns: {

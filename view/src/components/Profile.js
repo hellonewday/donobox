@@ -45,7 +45,7 @@ class Profile extends Component {
     const { data } = this.state;
     return (
       <Container style={{ marginTop: 30, marginBottom: 30 }}>
-        {this.state.data ? (
+        {/* {this.state.data ? (
           <Grid container spacing={2}>
             <Grid item xs={12} xl={4}>
               <div style={{ textAlign: "center" }}>
@@ -102,7 +102,7 @@ class Profile extends Component {
           </Grid>
         ) : (
           <p>"Loading"</p>
-        )}
+        )} */}
       </Container>
     );
   }
