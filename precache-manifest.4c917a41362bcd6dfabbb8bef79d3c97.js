@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "61de3e91be02b7f741f5f6e7a82ed9f8",
+    "revision": "9cac755df653dcadad4c778c0feba029",
     "url": "/donobox/index.html"
   },
   {
-    "revision": "73ab5765337f2c11368e",
+    "revision": "b393fa3c7aa959009eb3",
     "url": "/donobox/static/css/2.23bc2a9f.chunk.css"
   },
   {
-    "revision": "78e273b678195e4a54d6",
+    "revision": "d6c0fb0a5f88c890126a",
     "url": "/donobox/static/css/main.bff2c74a.chunk.css"
   },
   {
-    "revision": "73ab5765337f2c11368e",
-    "url": "/donobox/static/js/2.63e5162a.chunk.js"
+    "revision": "b393fa3c7aa959009eb3",
+    "url": "/donobox/static/js/2.a280a9b7.chunk.js"
   },
   {
     "revision": "5e9b6f5c16b720e8a86875f97734673e",
-    "url": "/donobox/static/js/2.63e5162a.chunk.js.LICENSE.txt"
+    "url": "/donobox/static/js/2.a280a9b7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "78e273b678195e4a54d6",
-    "url": "/donobox/static/js/main.7e5f2374.chunk.js"
+    "revision": "d6c0fb0a5f88c890126a",
+    "url": "/donobox/static/js/main.548f4098.chunk.js"
   },
   {
     "revision": "185a59dbd76efa81e330",
