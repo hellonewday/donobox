@@ -42,7 +42,16 @@ export default function Nabar() {
     setAnchorEl(null);
   };
 
-  useEffect(() => {}, []);
+  const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    alert("Đăng xuất thành công");
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    if (window.localStorage.getItem("token")) console.log("Hello");
+    else console.log("Sad");
+  }, []);
   return (
     <div className={classes.root}>
       <AppBar
@@ -75,7 +84,7 @@ export default function Nabar() {
                 Về chúng tôi
               </Link>
             </Typography>
-            {isUser ? (
+            {window.localStorage.getItem("token") ? (
               <div>
                 <Typography variant="h6" className="menu-item">
                   <Link className="route-link" onClick={handleClick}>
@@ -103,7 +112,7 @@ export default function Nabar() {
                     </ListItemIcon>
                     <ListItemText primary="Chỉnh sửa thông tin" />
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                       <InboxIcon fontSize="small" />
                     </ListItemIcon>
@@ -115,7 +124,10 @@ export default function Nabar() {
               ""
             )}
             <Button variant="contained" className="button-search">
-              <Link className="route-link" to={isUser ? "/create" : "/auth"}>
+              <Link
+                className="route-link"
+                to={window.localStorage.getItem("token") ? "/create" : "/auth"}
+              >
                 Đăng ký tài trợ
               </Link>
             </Button>
