@@ -7,13 +7,25 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FacebookIcon from "@material-ui/icons/Facebook";
-import BuildIcon from "@material-ui/icons/Build";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 const Item = ({ data, isControl }) => {
   const deleteCams = (id) => {
     console.log(id);
+    const configs = {
+      headers: {
+        Authorization: window.localStorage.getItem("token"),
+      },
+    };
+    Axios.delete(`https://donobox.herokuapp.com/api/campaigns/${id}`, configs)
+      .then((response) => {
+        console.log(response.status);
+        alert("Xóa thành công id " + id);
+        window.location.reload();
+      })
+      .catch((error) => console.log(error.response));
   };
   return (
     <Card className="card-box">
@@ -46,16 +58,16 @@ const Item = ({ data, isControl }) => {
       <CardActions>
         {isControl ? (
           <div>
-            <Button
+            {/* <Button
               size="small"
               color="primary"
               variant="outlined"
               style={{ marginRight: 10 }}
             >
               <BuildIcon /> Sửa
-            </Button>
+            </Button> */}
             <Button
-              onClick={() => deleteCams(data._id)}
+              onClick={() => deleteCams(data.id)}
               size="small"
               color="secondary"
               variant="outlined"
@@ -69,7 +81,7 @@ const Item = ({ data, isControl }) => {
           </Button>
         )}
         <Button size="small" color="secondary">
-          <Link className="route-link" to={`/campaign/${data._id}`}>
+          <Link className="route-link" to={`/campaign/${data.id}`}>
             Xem chương trình
           </Link>
         </Button>

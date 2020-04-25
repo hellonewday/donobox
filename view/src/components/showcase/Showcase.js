@@ -38,7 +38,7 @@ class Showcase extends Component {
       .catch((error) => console.log(error));
   };
   componentDidMount() {
-    Axios.get(`https://donobox.herokuapp.com/api/campaigns`)
+    Axios.get(`c`)
       .then((response) => this.setState({ data: response.data.data }))
       .catch((error) => console.log(error.response));
   }

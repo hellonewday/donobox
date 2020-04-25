@@ -45,12 +45,12 @@ class Profile extends Component {
     const { data } = this.state;
     return (
       <Container style={{ marginTop: 30, marginBottom: 30 }}>
-        {/* {this.state.data ? (
+        {this.state.data ? (
           <Grid container spacing={2}>
             <Grid item xs={12} xl={4}>
               <div style={{ textAlign: "center" }}>
                 <div className="image">
-                  <img src={this.state.data.avatarUrl} />
+                  <img src={this.state.data.avatar} />
                 </div>
                 <div class="upload-btn-wrapper">
                   <button class="btn">Tải ảnh cá nhân</button>
@@ -93,7 +93,7 @@ class Profile extends Component {
               <h3>Danh sách các chương trình</h3>
               <Grid container spacing={3}>
                 {this.state.data && this.state.data.campaigns
-                  ? this.state.data.campaigns.map((item) => {
+                  ? this.state.data.campaigns.campaign.map((item) => {
                       return <Item data={item} isControl={true} />;
                     })
                   : "Nhà tài trợ chưa đăng chiến dịch nào"}
@@ -102,7 +102,7 @@ class Profile extends Component {
           </Grid>
         ) : (
           <p>"Loading"</p>
-        )} */}
+        )}
       </Container>
     );
   }
