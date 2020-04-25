@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "272c35463f7420f351af0f02310f2d14",
+    "revision": "3f92cf89f4d781efe362051fafbd8410",
     "url": "/donobox/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/donobox/static/css/2.23bc2a9f.chunk.css"
   },
   {
-    "revision": "eac4a70f560cb9619c12",
+    "revision": "6d444edd8be94343a8c3",
     "url": "/donobox/static/css/main.7cb0fc39.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/donobox/static/js/2.2f4f80b8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "eac4a70f560cb9619c12",
-    "url": "/donobox/static/js/main.5af67b7c.chunk.js"
+    "revision": "6d444edd8be94343a8c3",
+    "url": "/donobox/static/js/main.e424a6eb.chunk.js"
   },
   {
     "revision": "185a59dbd76efa81e330",
