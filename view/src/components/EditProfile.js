@@ -34,7 +34,11 @@ class EditProfile extends Component {
       this.state.output
     )
       .then((response) => {
+        alert("Thay đổi thành công");
         console.log(response.data);
+        window.location.replace(
+          `/donobox/profile/${this.props.match.params.id}`
+        );
       })
       .catch((error) => {
         console.log(error.response);

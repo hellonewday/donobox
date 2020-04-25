@@ -19,7 +19,11 @@ class Register extends Component {
     axios
       .post(`https://donobox.herokuapp.com/api/users/register`, this.state)
       .then((response) => {
-        if (response.data.success) alert("Xong");
+        if (response.data.success)
+          alert(
+            "Bạn cần hoàn tất thông tin cá nhân để đăng chiến dịch của mình. Hãy đăng nhập và chỉnh sửa thông tin trước khi đăng bài"
+          );
+        window.location.reload();
       })
       .catch((error) => console.log(error.response));
   };

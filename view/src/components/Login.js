@@ -25,7 +25,7 @@ class Login extends Component {
           console.log(response.data);
         }
 
-        window.location.replace("/");
+        window.location.replace("/donobox");
       })
       .catch((error) => console.log(error.response));
   };
