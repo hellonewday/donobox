@@ -7,7 +7,14 @@ import "../App.css";
 export default class SearchBar extends Component {
   render() {
     return (
-      <div style={{ background: `url('${rice}')`, marginTop: -20 }}>
+      <div
+        style={{
+          background: `url('${rice}')`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          marginTop: -20,
+        }}
+      >
         {/* <img src={rice} alt="rice" /> */}
         <Container fixed style={{ padding: "150px 0px 200px 0px" }}>
           <h1 className="search-title">

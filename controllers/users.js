@@ -1,5 +1,5 @@
 const User = require("../model/User");
-const { validateRegister } = require("../middleware/validation");
+const { validateRegister, validateLogin } = require("../middleware/validation");
 const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
@@ -53,6 +53,7 @@ module.exports.registerUser = async (req, res, next) => {
         email: req.body.email,
         password: hash,
         avatarUrl: avatar,
+        name: req.body.name,
       });
       data.save().then((response) => {
         return res.status(201).json({ success: true, response });
@@ -66,7 +67,7 @@ module.exports.loginUser = async (req, res, next) => {
   let isValid = await User.findOne({ email: req.body.email });
   if (!isValid) return res.status(403).json({ message: "No user found" });
 
-  let inputValidation = validateRegister(req.body);
+  let inputValidation = validateLogin(req.body);
   if (inputValidation.error)
     return res.status(400).json({
       success: false,

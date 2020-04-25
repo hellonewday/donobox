@@ -31,6 +31,13 @@
   .card-box {
     max-width: 300px;
   }
+  .card-showcase {
+    max-width: 300px;
+  }
+
+  .account-form {
+    display: block !important;
+  }
   .search-desc {
     color: white;
     text-align: center;
@@ -44,9 +51,7 @@
   .social-block {
     display: block !important;
   }
-  .tips-container {
-    display: block !important;
-  }
+
 }
 
 .search-title {
@@ -71,6 +76,11 @@
   max-width: 380px;
 }
 
+.card-showcase {
+  max-width: 350px;
+  margin: 6px;
+}
+
 .button-search {
   background: linear-gradient(#4ea2e3, #1684d9);
   color: white !important;
@@ -90,11 +100,6 @@
   font-weight: 600 !important;
 }
 
-.menu-item:hover {
-  border: 1px solid #1684d9;
-  border-radius: 5px;
-  transition: all 0.4s;
-}
 
 .social {
   margin: 40px 0;
@@ -119,12 +124,44 @@
   margin: 20px;
 }
 
-.tips-container {
-  display: flex !important;
-  justify-content: space-around;
-}
 
 .contact-paper {
   margin: 10px;
   padding: 10px;
+}
+
+.route-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer {
+  background-color: skyblue;
+  padding: 20px;
+}
+
+.menu-dropdown {
+  top: 5% !important;
+  bottom: 5% !important;
+}
+
+body {
+  background: none !important;
+}
+
+.form-auth {
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px orange dashed;
+  margin: 20px;
+}
+
+.search-city {
+  margin-bottom: 10px;
+}
+
+.account-form {
+  display: flex;
+  justify-content: space-around;
+  margin: 40px;
 }

@@ -1,29 +1,31 @@
-import React from "react";
-import "./App.css";
+import React, { Component } from "react";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
+import Home from "./components/Home";
 import Navbar from "./components/Navbar";
-import SearchBar from "./components/Search";
-import Popular from "./components/showcase/Popular";
-import NearYou from "./components/showcase/NearYou";
-import Social from "./components/Social";
-import Tips from "./components/Tips";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
+import Tips from "./components/Tips";
+import Account from "./components/Account";
+import CreateCam from "./components/CreateCam";
+import Showcase from "./components/showcase/Showcase";
 
-function App() {
-  return (
-    <div>
-      <Navbar />
-      <SearchBar />
-
-      <Popular />
-      <NearYou />
-      <Social />
-      <Tips />
-      <Contact />
-
-      <Footer />
-    </div>
-  );
+class Routes extends Component {
+  render() {
+    return (
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Navbar />
+        <Switch>
+          <Route exact path="/"  component={(props) => <Home />} />
+          <Route path="/contact" component={(props) => <Contact />} />
+          <Route path="/covid" component={(props) => <Tips />} />
+          <Route path="/auth" component={(props) => <Account />} />
+          <Route path="/create" component={(props) => <CreateCam />} />
+          <Route path="/campaigns" component={(props) => <Showcase />} />
+        </Switch>
+        <Footer />
+      </BrowserRouter>
+    );
+  }
 }
 
-export default App;
+export default Routes;

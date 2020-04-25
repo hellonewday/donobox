@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { Container, Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import "../App.css";
 
 class Footer extends Component {
   render() {
     return (
-      <div style={{ backgroundColor: "skyblue", padding: 20 }}>
+      <div className="footer">
         <Container>
           <Grid container spacing={3}>
-            <Grid item xs={3}>
+            <Grid item lg={3} xs={12}>
               <Typography variant="h6">
                 <b>Tin tức</b>
               </Typography>
@@ -16,7 +17,7 @@ class Footer extends Component {
               <p>Dịch vụ</p>
               <p>Liên hệ</p>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item lg={5} xs={12}>
               <Typography variant="h6">
                 <b>Danh mục từ thiện và hỗ trợ</b>
               </Typography>
@@ -26,7 +27,7 @@ class Footer extends Component {
               <p>Việc làm</p>
               <p>Giáo dục</p>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item lg={4} xs={12}>
               <Typography variant="h6">
                 <b>Quảng cáo</b>
               </Typography>
