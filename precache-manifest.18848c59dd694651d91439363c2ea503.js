@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bc6f62650c9784a4ba3f04000cd4cc1c",
+    "revision": "88f59d370f08d69b4c030576e983e71f",
     "url": "/donobox/index.html"
   },
   {
