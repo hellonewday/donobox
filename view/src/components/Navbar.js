@@ -16,6 +16,7 @@ import Fade from "@material-ui/core/Fade";
 
 import logo from "../img/logo.png";
 import "../App.css";
+import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,8 +50,12 @@ export default function Nabar() {
   };
 
   useEffect(() => {
-    if (window.localStorage.getItem("token")) console.log("Hello");
-    else console.log("Sad");
+    if (window.localStorage.getItem("token")) {
+      let id = window.localStorage.getItem("id");
+      Axios.get(`https://donobox.herokuapp.com/api/users/${id}`)
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error.response));
+    }
   }, []);
   return (
     <div className={classes.root}>

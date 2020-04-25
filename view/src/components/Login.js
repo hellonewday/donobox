@@ -17,13 +17,15 @@ class Login extends Component {
     // console.log(this.state);
     Axios.post(`https://donobox.herokuapp.com/api/users/login`, this.state)
       .then((response) => {
-        if (response.data.success) alert("Đăng nhập thành công!");
-        window.localStorage.setItem("token", response.data.token);
-        window.localStorage.setItem("id", response.data.id);
-        window.localStorage.setItem("name", response.data.name);
+        if (response.data.success) {
+          alert("Đăng nhập thành công!");
+          window.localStorage.setItem("token", response.data.token);
+          window.localStorage.setItem("id", response.data.id);
+          window.localStorage.setItem("name", response.data.name);
+          console.log(response.data);
+        }
 
-        console.log(response.data);
-        window.location.replace("/");
+        // window.location.replace("/");
       })
       .catch((error) => console.log(error.response));
   };

@@ -20,7 +20,7 @@ module.exports.getUsers = (req, res, next) => {
 };
 
 module.exports.getUser = async (req, res, next) => {
-  let isValid = await User.findOne({ email: req.body.email });
+  let isValid = await User.findOne({ _id: req.params.id });
   if (!isValid)
     return res.status(403).json({ message: "No user found", success: false });
   User.findOne({ _id: req.params.id }).exec((err, doc) => {
