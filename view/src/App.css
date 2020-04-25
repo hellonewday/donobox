@@ -51,7 +51,6 @@
   .social-block {
     display: block !important;
   }
-
 }
 
 .search-title {
@@ -100,7 +99,6 @@
   font-weight: 600 !important;
 }
 
-
 .social {
   margin: 40px 0;
   padding: 60px;
@@ -123,7 +121,6 @@
   max-width: 500px;
   margin: 20px;
 }
-
 
 .contact-paper {
   margin: 10px;
@@ -164,4 +161,44 @@ body {
   display: flex;
   justify-content: space-around;
   margin: 40px;
+}
+
+/* Button */
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 1px solid gray;
+  color: black;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.profile-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-links .route-link {
+  padding: 10px;
+  margin: 10px;
+}
+
+.image img {
+  width: 200px;
 }

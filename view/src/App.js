@@ -8,6 +8,9 @@ import Tips from "./components/Tips";
 import Account from "./components/Account";
 import CreateCam from "./components/CreateCam";
 import Showcase from "./components/showcase/Showcase";
+import Profile from "./components/Profile";
+import EditProfile from "./components/EditProfile";
+import EditCams from "./components/EditCams";
 
 class Routes extends Component {
   render() {
@@ -15,12 +18,15 @@ class Routes extends Component {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Navbar />
         <Switch>
-          <Route exact path="/"  component={(props) => <Home />} />
+          <Route exact path="/" component={(props) => <Home />} />
           <Route path="/contact" component={(props) => <Contact />} />
           <Route path="/covid" component={(props) => <Tips />} />
           <Route path="/auth" component={(props) => <Account />} />
           <Route path="/create" component={(props) => <CreateCam />} />
           <Route path="/campaigns" component={(props) => <Showcase />} />
+          <Route path="/profile/:id" component={Profile} />
+          <Route path="/edit/profile/:id" component={EditProfile} />
+          <Route path="/edit/campaigns/:id" component={EditCams} />
         </Switch>
         <Footer />
       </BrowserRouter>

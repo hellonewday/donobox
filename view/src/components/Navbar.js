@@ -45,16 +45,15 @@ export default function Nabar() {
 
   const handleLogout = () => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("name");
+
     alert("Đăng xuất thành công");
-    window.location.replace("/");
+    window.location.replace("/donobox");
   };
 
   useEffect(() => {
     if (window.localStorage.getItem("token")) {
-      let id = window.localStorage.getItem("id");
-      Axios.get(`https://donobox.herokuapp.com/api/users/${id}`)
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error.response));
+      setUser(window.localStorage.getItem("name"));
     }
   }, []);
   return (
@@ -93,7 +92,7 @@ export default function Nabar() {
               <div>
                 <Typography variant="h6" className="menu-item">
                   <Link className="route-link" onClick={handleClick}>
-                    Maximusss
+                    <b> {isUser}</b>
                   </Link>
                 </Typography>
                 <Menu
@@ -106,21 +105,14 @@ export default function Nabar() {
                   className="menu-dropdown"
                 >
                   <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <SendIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Trang cá nhân" />
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <DraftsIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Chỉnh sửa thông tin" />
+                    <Link
+                      className="route-link"
+                      to={`/profile/${window.localStorage.getItem("id")}`}
+                    >
+                      <ListItemText primary="Trang cá nhân" />
+                    </Link>
                   </MenuItem>
                   <MenuItem onClick={handleLogout}>
-                    <ListItemIcon>
-                      <InboxIcon fontSize="small" />
-                    </ListItemIcon>
                     <ListItemText primary="Đăng xuất" />
                   </MenuItem>
                 </Menu>
@@ -133,7 +125,7 @@ export default function Nabar() {
                 className="route-link"
                 to={window.localStorage.getItem("token") ? "/create" : "/auth"}
               >
-                Đăng ký tài trợ
+                {isUser ? "Đăng ký tài trợ" : "Đăng ký tài khoản"}
               </Link>
             </Button>
           </div>

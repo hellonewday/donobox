@@ -23,10 +23,12 @@ module.exports.getUser = async (req, res, next) => {
   let isValid = await User.findOne({ _id: req.params.id });
   if (!isValid)
     return res.status(403).json({ message: "No user found", success: false });
-  User.findOne({ _id: req.params.id }).exec((err, doc) => {
-    if (err) return res.status(400).json({ error: err });
-    return res.status(200).json({ data: doc });
-  });
+  User.findOne({ _id: req.params.id })
+    .populate("campaigns")
+    .exec((err, doc) => {
+      if (err) return res.status(400).json({ error: err });
+      return res.status(200).json({ data: doc });
+    });
 };
 
 module.exports.registerUser = async (req, res, next) => {
