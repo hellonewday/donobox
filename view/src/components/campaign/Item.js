@@ -32,10 +32,10 @@ const Item = ({ data, isControl }) => {
       <CardActionArea>
         <CardMedia
           component="img"
-          alt="Contemplative Reptile"
+          alt={data.name}
           height="140"
           image={data.image}
-          title="Contemplative Reptile"
+          title={data.name}
           style={{ maxWidth: 400 }}
         />
         <CardContent>

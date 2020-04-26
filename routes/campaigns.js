@@ -12,7 +12,7 @@ router.get("/", campaigns.getCams);
 router.get("/:id", campaigns.getCam);
 router.post("/", auth, uploads.single("picture"), campaigns.createCam);
 router.patch("/:id",auth, uploads.single("picture"), campaigns.updateCam);
-router.delete("/:id", auth, campaigns.deleteCam);
+router.delete("/:id", campaigns.deleteCam);
 router.get("/:id/comments", campaigns.getComments);
 router.post("/:id/comments", campaigns.createComment);
 router.delete("/:campaignId/comments/:id", campaigns.deleteComment);

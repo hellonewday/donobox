@@ -668,19 +668,18 @@ module.exports.deleteCam = async (req, res, next) => {
     return res
       .status(400)
       .json({ success: false, message: "Campaign not found" });
-  if (isValid.host.toString() !== req.user._id.toString())
-    return res
-      .status(401)
-      .json({ message: "You are not allowed to do this action" });
   Campaign.deleteOne({ _id: req.params.id }).exec(async (error, response) => {
     if (error) return res.status(400).json({ success: false, error });
     else {
       let myUser = await User.findOne({ _id: isValid.host });
-      let myCams = myUser.campaigns.filter((item) => {
-        return item !== req.params.id;
-      });
-      myUser.campaigns = myCams;
-      await myUser.save();
+      if (myUser.campaigns.length > 0) {
+        let myCams = myUser.campaigns.filter((item) => {
+          return item !== req.params.id;
+        });
+        myUser.campaigns = myCams;
+        await myUser.save();
+      }
+
       return res.status(200).json({ success: true, response });
     }
   });
