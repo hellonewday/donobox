@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/donobox/static/css/main.dd1e7169.chunk.css",
-    "main.js": "/donobox/static/js/main.d9d07a2d.chunk.js",
-    "main.js.map": "/donobox/static/js/main.d9d07a2d.chunk.js.map",
+    "main.js": "/donobox/static/js/main.cf322a20.chunk.js",
+    "main.js.map": "/donobox/static/js/main.cf322a20.chunk.js.map",
     "runtime-main.js": "/donobox/static/js/runtime-main.5076d40d.js",
     "runtime-main.js.map": "/donobox/static/js/runtime-main.5076d40d.js.map",
     "static/css/2.23bc2a9f.chunk.css": "/donobox/static/css/2.23bc2a9f.chunk.css",
     "static/js/2.1510bd59.chunk.js": "/donobox/static/js/2.1510bd59.chunk.js",
     "static/js/2.1510bd59.chunk.js.map": "/donobox/static/js/2.1510bd59.chunk.js.map",
     "index.html": "/donobox/index.html",
-    "precache-manifest.227eef2122009512101629dedf20930c.js": "/donobox/precache-manifest.227eef2122009512101629dedf20930c.js",
+    "precache-manifest.7e88f471c3fd7145a567ecb3fa67fab2.js": "/donobox/precache-manifest.7e88f471c3fd7145a567ecb3fa67fab2.js",
     "service-worker.js": "/donobox/service-worker.js",
     "static/css/2.23bc2a9f.chunk.css.map": "/donobox/static/css/2.23bc2a9f.chunk.css.map",
     "static/css/main.dd1e7169.chunk.css.map": "/donobox/static/css/main.dd1e7169.chunk.css.map",
@@ -29,6 +29,6 @@
     "static/css/2.23bc2a9f.chunk.css",
     "static/js/2.1510bd59.chunk.js",
     "static/css/main.dd1e7169.chunk.css",
-    "static/js/main.d9d07a2d.chunk.js"
+    "static/js/main.cf322a20.chunk.js"
   ]
 }
