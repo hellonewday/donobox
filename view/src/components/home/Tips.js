@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import rice from "../img/rice.jpg";
-import donate from "../img/donate.jpg";
-import statistics from "../img/statistic.png";
-import stayhome from "../img/stayhome.jpg";
+import rice from "../../img/rice.jpg";
+import donate from "../../img/donate.jpg";
+import statistics from "../../img/statistic.png";
+import stayhome from "../../img/stayhome.jpg";
 
 import { Container, Grid, CardActions, Button } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
@@ -10,7 +10,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import divider from "../img/divider2.png";
+import divider from "../../img/divider2.png";
 import { Link } from "react-router-dom";
 class Tips extends Component {
   render() {

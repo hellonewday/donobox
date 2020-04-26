@@ -78,6 +78,8 @@ const Item = ({ data, isControl }) => {
         ) : (
           <Button size="small" color="primary" variant="outlined">
             <a
+              target="_blank"
+              rel="noopener noreferrer" 
               className="route-link"
               href={`https://www.facebook.com/sharer/sharer.php?u=http://donobox.me/donobox/campagin/${data.id}`}
             >

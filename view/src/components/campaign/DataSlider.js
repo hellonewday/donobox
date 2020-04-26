@@ -5,7 +5,7 @@ import { Container } from "@material-ui/core";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../App.css";
-import Item from "../Item";
+import Item from "./Item";
 
 export default class DataSlider extends Component {
   render() {

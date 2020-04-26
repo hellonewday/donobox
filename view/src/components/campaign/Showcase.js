@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchBar from "../Search";
+import SearchBar from "../home/Search";
 import divider from "../../img/divider.png";
 import {
   Container,
@@ -12,7 +12,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import donation from "../../img/rice.jpg";
 import "../../App.css";
 import Axios from "axios";
-import Item from "../Item";
+import Item from "./Item";
 import Loading from "../Loading";
 
 class Showcase extends Component {

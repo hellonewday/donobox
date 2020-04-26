@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Grid, Paper } from "@material-ui/core";
-import "../App.css";
-import friends from "../img/friends.jpg";
+import "../../App.css";
+import friends from "../../img/friends.jpg";
 
 class Contact extends Component {
   render() {

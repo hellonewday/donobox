@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Container, TextField, Button } from "@material-ui/core";
 // import rice from "../img/rice.jpg";
 import Typewriter from "typewriter-effect";
-import "../App.css";
+import "../../App.css";
 import Axios from "axios";
-import DataSlider from "./showcase/DataSlider";
+import DataSlider from "../campaign/DataSlider";
 
 export default class SearchBar extends Component {
   state = {

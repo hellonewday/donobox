@@ -5,8 +5,8 @@ import "moment/locale/vi";
 import { Line } from "react-chartjs-2";
 import Numbers from "./Numbers";
 import { Container, Grid } from "@material-ui/core";
-import SearchBar from "./Search";
-import statistic from "../img/statistic.png";
+import SearchBar from "../home/Search";
+import statistic from "../../img/statistic.png";
 
 moment.locale("vi");
 export default class Chart extends Component {

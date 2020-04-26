@@ -11,8 +11,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import Fade from "@material-ui/core/Fade";
 
-import logo from "../img/logo.png";
-import "../App.css";
+import logo from "../../img/logo.png";
+import "../../App.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {

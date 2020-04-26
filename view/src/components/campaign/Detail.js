@@ -11,17 +11,29 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import "../App.css";
+import "../../App.css";
 import { Link } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
-import divider from "../img/divider2.png";
-import Loading from "./Loading";
+import divider from "../../img/divider2.png";
+import Loading from "../Loading";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import lulu from "../../img/4.jpg";
+import anui from "../../img/anui.jpg";
+import Slide from "@material-ui/core/Slide";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 class Detail extends Component {
   state = {
     data: [],
     comment: {},
     loading: true,
+    openLike: false,
+    openDislike: false,
   };
   componentDidMount() {
     Axios.get(
@@ -35,12 +47,18 @@ class Detail extends Component {
       .catch((error) => {
         console.log(error.response);
       });
+
+    setTimeout(() => this.setState({ openLike: true }), 30000);
   }
 
   handleChange = (e) => {
     this.setState({
       comment: { ...this.state.comment, [e.target.name]: e.target.value },
     });
+  };
+
+  handleClose = () => {
+    this.setState({ openLike: false, openDislike: false });
   };
 
   handleLike = () => {
@@ -73,6 +91,8 @@ class Detail extends Component {
       .catch((error) => {
         console.log(error.response);
       });
+
+    this.setState({ openLike: true });
   };
 
   handleDislike = () => {
@@ -106,6 +126,7 @@ class Detail extends Component {
       .catch((error) => {
         console.log(error.response);
       });
+    this.setState({ openDislike: true });
   };
 
   handleSubmit = (e) => {
@@ -124,7 +145,7 @@ class Detail extends Component {
       });
   };
   render() {
-    const { data, loading } = this.state;
+    const { data, loading, openLike, openDislike } = this.state;
     return (
       <Container>
         {loading ? (
@@ -149,13 +170,20 @@ class Detail extends Component {
                 )}
               </div>
               <div style={{ marginTop: 20 }}>
-                <Button
-                  className="social-button"
-                  color="primary"
-                  variant="contained"
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  href={`https://www.facebook.com/sharer/sharer.php?u=http://donobox.me/donobox/campagin/${data.id}`}
+                  className="route-link"
                 >
-                  <FacebookIcon style={{ marginRight: 10 }} /> Share
-                </Button>
+                  <Button
+                    className="social-button"
+                    color="primary"
+                    variant="contained"
+                  >
+                    <FacebookIcon style={{ marginRight: 10 }} /> Share
+                  </Button>
+                </a>
                 <Button
                   className="social-button"
                   style={{ backgroundColor: "#2a80c7", color: "white" }}
@@ -183,10 +211,8 @@ class Detail extends Component {
                 </Button>
               </div>
             </div>
-
             <img
               src={data.image}
-              alt="image"
               style={{ width: "100%", margin: "10px 0px" }}
             />
             {data.host ? (
@@ -208,11 +234,99 @@ class Detail extends Component {
             ) : (
               ""
             )}
-            <div style={{ fontSize: 20 }}>
+            <div style={{ fontSize: 20, marginTop: 30 }}>
               {ReactHtmlParser(data.description)}
             </div>
+            <Dialog
+              open={openLike}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={this.handleClose}
+              aria-labelledby="alert-dialog-slide-title"
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogContent>
+                <img style={{ width: "100%" }} src={lulu} />
+                <h4>
+                  Wow, có vẻ bạn rất quan tâm tới chiến dịch về {data.genre}
+                </h4>
+                <p>
+                  <b>Donobox</b> biết điều đó, chúng tôi muốn kể cho bạn những
+                  câu chuyện thật hay, hãy nhấn đăng ký email để nhận những câu
+                  chuyện từ những nhà tài trợ của chúng tôi nhé
+                </p>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Email của bạn"
+                  margin="dense"
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClose} color="primary">
+                  Hủy
+                </Button>
+                <Button
+                  onClick={() => {
+                    alert("Cảm ơn bạn rất nhiều");
+                    this.setState({ openLike: false });
+                  }}
+                  color="primary"
+                  variant="contained"
+                >
+                  Nhận thông tin
+                </Button>
+              </DialogActions>
+            </Dialog>
 
-            <img src={divider} style={{ marginBottom: 10, width: "70%" }} />
+            <Dialog
+              open={openDislike}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={this.handleClose}
+              aria-labelledby="alert-dialog-slide-title"
+              aria-describedby="alert-dialog-slide-description"
+            >
+              <DialogContent>
+                <img style={{ width: "100%" }} src={anui} />
+                <h4>Ôi không, có chuyện gì với chiến dịch {data.name} vậy?</h4>
+                <p>
+                  <b>Donobox</b> rất tiếc về trải nghiệm không tốt này. Hãy cho
+                  chúng tôi biết lý do tại sao nhé!
+                </p>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Email của bạn"
+                  margin="dense"
+                />
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Lý do về trải nghiệm này"
+                  margin="dense"
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClose} color="primary">
+                  Hủy
+                </Button>
+                <Button
+                  onClick={() => {
+                    alert("Cảm ơn bạn rất nhiều");
+                    this.setState({ openDislike: false });
+                  }}
+                  color="primary"
+                  variant="contained"
+                >
+                  Báo cáo
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <img
+              src={divider}
+              style={{ marginBottom: 10, marginTop: 20, width: "70%" }}
+            />
             <div className="comments-part">
               <h2>Bình luận ({data.comments ? data.comments.length : "0"})</h2>
               <Grid container spacing={2}>
@@ -244,7 +358,17 @@ class Detail extends Component {
                   />
                 </Grid>
               </Grid>
-              <Button onClick={this.handleSubmit}>Đăng</Button>
+              <Button
+                style={{
+                  backgroundColor: "green",
+                  color: "white",
+                  padding: 10,
+                  marginTop: 10,
+                }}
+                onClick={this.handleSubmit}
+              >
+                Đăng
+              </Button>
             </div>
             <div className="comments">
               {data.comments

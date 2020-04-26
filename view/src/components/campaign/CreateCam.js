@@ -14,7 +14,7 @@ import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import Typewriter from "typewriter-effect";
 import Axios from "axios";
-import karma from "../img/karma.jpg";
+import karma from "../../img/karma.jpg";
 
 class CreateCam extends Component {
   state = {};
