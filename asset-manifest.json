@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/donobox/static/css/main.0d9fcb9b.chunk.css",
-    "main.js": "/donobox/static/js/main.eb28f6cd.chunk.js",
-    "main.js.map": "/donobox/static/js/main.eb28f6cd.chunk.js.map",
+    "main.css": "/donobox/static/css/main.59c4c4d5.chunk.css",
+    "main.js": "/donobox/static/js/main.04736685.chunk.js",
+    "main.js.map": "/donobox/static/js/main.04736685.chunk.js.map",
     "runtime-main.js": "/donobox/static/js/runtime-main.5076d40d.js",
     "runtime-main.js.map": "/donobox/static/js/runtime-main.5076d40d.js.map",
     "static/css/2.23bc2a9f.chunk.css": "/donobox/static/css/2.23bc2a9f.chunk.css",
-    "static/js/2.8fb5e171.chunk.js": "/donobox/static/js/2.8fb5e171.chunk.js",
-    "static/js/2.8fb5e171.chunk.js.map": "/donobox/static/js/2.8fb5e171.chunk.js.map",
+    "static/js/2.fc499da4.chunk.js": "/donobox/static/js/2.fc499da4.chunk.js",
+    "static/js/2.fc499da4.chunk.js.map": "/donobox/static/js/2.fc499da4.chunk.js.map",
     "index.html": "/donobox/index.html",
-    "precache-manifest.48b2fc368ec4ec33b305e54cef41e7a6.js": "/donobox/precache-manifest.48b2fc368ec4ec33b305e54cef41e7a6.js",
+    "precache-manifest.acbd382b2efb39394346de9e0eff60ec.js": "/donobox/precache-manifest.acbd382b2efb39394346de9e0eff60ec.js",
     "service-worker.js": "/donobox/service-worker.js",
     "static/css/2.23bc2a9f.chunk.css.map": "/donobox/static/css/2.23bc2a9f.chunk.css.map",
-    "static/css/main.0d9fcb9b.chunk.css.map": "/donobox/static/css/main.0d9fcb9b.chunk.css.map",
-    "static/js/2.8fb5e171.chunk.js.LICENSE.txt": "/donobox/static/js/2.8fb5e171.chunk.js.LICENSE.txt",
+    "static/css/main.59c4c4d5.chunk.css.map": "/donobox/static/css/main.59c4c4d5.chunk.css.map",
+    "static/js/2.fc499da4.chunk.js.LICENSE.txt": "/donobox/static/js/2.fc499da4.chunk.js.LICENSE.txt",
     "static/media/donate.jpg": "/donobox/static/media/donate.4c36a880.jpg",
     "static/media/friends.jpg": "/donobox/static/media/friends.2f76c3a7.jpg",
+    "static/media/karma.jpg": "/donobox/static/media/karma.7a7b6f2e.jpg",
     "static/media/rice.jpg": "/donobox/static/media/rice.02bd1750.jpg",
     "static/media/slick-theme.css": "/donobox/static/media/slick.f97e3bbf.svg",
     "static/media/statistic.png": "/donobox/static/media/statistic.3217a0e6.png",
@@ -24,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.5076d40d.js",
     "static/css/2.23bc2a9f.chunk.css",
-    "static/js/2.8fb5e171.chunk.js",
-    "static/css/main.0d9fcb9b.chunk.css",
-    "static/js/main.eb28f6cd.chunk.js"
+    "static/js/2.fc499da4.chunk.js",
+    "static/css/main.59c4c4d5.chunk.css",
+    "static/js/main.04736685.chunk.js"
   ]
 }
