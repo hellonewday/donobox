@@ -4,17 +4,23 @@ import divider from "../../img/divider.png";
 import Button from "@material-ui/core/Button";
 import "../../App.css";
 import Axios from "axios";
+import Loading from "../Loading";
 
 class NearYou extends Component {
   state = {
     data: [],
+    loading: true,
   };
   componentDidMount() {
     Axios.get(`https://donobox.herokuapp.com/api/campaigns`)
-      .then((response) => this.setState({ data: response.data.data }))
+      .then((response) => {
+        this.setState({ loading: false });
+        this.setState({ data: response.data.data });
+      })
       .catch((error) => console.log(error.response));
   }
   render() {
+    const {loading} = this.state;
     return (
       <div style={{ marginTop: 40 }}>
         <h2 style={{ textAlign: "center", marginBottom: 6 }}>
@@ -31,7 +37,11 @@ class NearYou extends Component {
             marginBottom: 6,
           }}
         />
-        <DataSlider data={this.state.data} />
+        {loading ? (
+          <Loading message={false} />
+        ) : (
+          <DataSlider data={this.state.data} />
+        )}
         <Button className="button-more">Xem thêm</Button>
       </div>
     );

@@ -12,7 +12,9 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import Typewriter from "typewriter-effect";
 import Axios from "axios";
+import karma from "../img/karma.jpg";
 
 class CreateCam extends Component {
   state = {};
@@ -48,7 +50,7 @@ class CreateCam extends Component {
     Axios.post("https://donobox.herokuapp.com/api/campaigns", fd, config)
       .then((response) => {
         if (response.data.success) alert("Đăng chiến dịch thành công. ");
-        console.log(response.data);
+        window.location.replace("/donobox/campaigns");
       })
       .catch((error) => {
         console.log(error.response);
@@ -58,7 +60,26 @@ class CreateCam extends Component {
   render() {
     return (
       <Container>
-        <h1>Đăng chiến dịch tài trợ của bạn</h1>
+        <div className="interactive-create-ui">
+          <h1 className="create-cam-title">
+            <Typewriter
+              options={{
+                strings: [
+                  "Đăng chiến dịch của bạn",
+                  "Hãy sáng tạo",
+                  "Hãy thật nổi bật",
+                  "Hãy thật có ích",
+                ],
+                autoStart: true,
+                loop: true,
+                delay: 40,
+                deleteSpeed: 100,
+              }}
+            />
+          </h1>
+          <img src={karma} style={{ width: "100%", marginBottom: 20 }} />
+        </div>
+
         <form>
           <Grid container spacing={2}>
             <Grid item xs={12} lg={6}>
@@ -167,7 +188,7 @@ class CreateCam extends Component {
               >
                 <InputLabel id="doi-tuong">Đối tượng hướng tới</InputLabel>
                 <Select
-                  fullWidth 
+                  fullWidth
                   value={this.state.location_type || ""}
                   name="location_type"
                   onChange={this.handleChange}

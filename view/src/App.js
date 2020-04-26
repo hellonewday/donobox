@@ -12,6 +12,7 @@ import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import EditCams from "./components/EditCams";
 import Detail from "./components/Detail";
+import Chart from "./components/Chart";
 
 class Routes extends Component {
   render() {
@@ -29,6 +30,7 @@ class Routes extends Component {
           <Route path="/profile/:id" component={Profile} />
           <Route path="/edit/profile/:id" component={EditProfile} />
           <Route path="/edit/campaigns/:id" component={EditCams} />
+          <Route path="/chart" component={Chart} />
         </Switch>
         <Footer />
       </BrowserRouter>

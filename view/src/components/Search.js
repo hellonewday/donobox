@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, TextField, Button } from "@material-ui/core";
-import rice from "../img/rice.jpg";
+// import rice from "../img/rice.jpg";
 import Typewriter from "typewriter-effect";
 import "../App.css";
 import Axios from "axios";
@@ -32,7 +32,7 @@ export default class SearchBar extends Component {
     return (
       <div
         style={{
-          background: `url('${rice}')`,
+          background: `url('${this.props.image}')`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           marginTop: -20,

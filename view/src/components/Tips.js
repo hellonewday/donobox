@@ -4,13 +4,14 @@ import donate from "../img/donate.jpg";
 import statistics from "../img/statistic.png";
 import stayhome from "../img/stayhome.jpg";
 
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, CardActions, Button } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import divider from "../img/divider2.png";
+import { Link } from "react-router-dom";
 class Tips extends Component {
   render() {
     return (
@@ -92,6 +93,13 @@ class Tips extends Component {
                       dịch
                     </Typography>
                   </CardContent>
+                  <CardActions>
+                    <Button color="primary" variant="outlined">
+                      <Link className="route-link" to="/campaigns">
+                        Xem tất cả
+                      </Link>
+                    </Button>
+                  </CardActions>
                 </CardActionArea>
               </Card>
             </Grid>
@@ -114,6 +122,13 @@ class Tips extends Component {
                       Nam
                     </Typography>
                   </CardContent>
+                  <CardActions>
+                    <Button color="secondary" variant="contained">
+                      <Link className="route-link" to="/chart">
+                        Xem ngay
+                      </Link>
+                    </Button>
+                  </CardActions>
                 </CardActionArea>
               </Card>
             </Grid>

@@ -9,43 +9,57 @@ import {
   RadioGroup,
 } from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-
+import donation from "../../img/rice.jpg";
 import "../../App.css";
 import Axios from "axios";
 import Item from "../Item";
+import Loading from "../Loading";
 
 class Showcase extends Component {
   state = {
     filter: "male",
     data: [],
+    loading: true,
   };
   handleFilter = (event) => {
     this.setState({ filter: event.target.value });
     console.log(event.target.name);
     console.log(event.target.value);
+    this.setState({ loading: true });
     Axios.get(
       `https://donobox.herokuapp.com/api/campaigns?${event.target.name}=${event.target.value}`
     )
-      .then((response) => this.setState({ data: response.data.data }))
+      .then((response) => {
+        this.setState({ loading: false });
+        this.setState({ data: response.data.data });
+      })
       .catch((error) => console.log(error));
   };
 
   handleLocation = (event) => {
+    this.setState({ loading: true });
     Axios.get(
       `https://donobox.herokuapp.com/api/campaigns?city=${event.target.value}`
     )
-      .then((response) => this.setState({ data: response.data.data }))
+      .then((response) => {
+        this.setState({ loading: false });
+        this.setState({ data: response.data.data });
+      })
       .catch((error) => console.log(error));
   };
   componentDidMount() {
-    Axios.get(`c`)
-      .then((response) => this.setState({ data: response.data.data }))
+    Axios.get(`https://donobox.herokuapp.com/api/campaigns`)
+      .then((response) => {
+        this.setState({ loading: false });
+        this.setState({ data: response.data.data });
+      })
       .catch((error) => console.log(error.response));
   }
   render() {
+    const { data, loading } = this.state;
     return (
       <div>
-        <SearchBar />
+        <SearchBar image={donation} />
         <Container>
           <Grid container spacing={2}>
             <Grid item xs={12} xl={3} lg={4}>
@@ -170,8 +184,10 @@ class Showcase extends Component {
               spacing={3}
               style={{ marginBottom: 20, marginTop: 20 }}
             >
-              {this.state.data.length > 0 ? (
-                this.state.data.map((item) => {
+              {loading ? (
+                <Loading message={true} />
+              ) : data.length > 0 ? (
+                data.map((item) => {
                   return (
                     <Grid item xs={12} xl={4} lg={4}>
                       <Item data={item} isControl={false} />

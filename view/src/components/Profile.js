@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Item from "./Item";
+import Loading from "./Loading";
 class Profile extends Component {
   state = {
     data: [],
+    loading: true,
   };
   componentDidMount() {
     Axios.get(
@@ -17,6 +19,7 @@ class Profile extends Component {
         this.setState({ data: response.data.data });
         console.log(this.state.data);
         console.log(this.state.data.campaigns.length);
+        this.setState({ loading: false });
       })
       .catch((error) => console.log(error.response));
   }
@@ -36,13 +39,16 @@ class Profile extends Component {
       config
     )
       .then((response) => {
-        console.log(response.data);
+        alert("Tải ảnh đại diện mới thành công");
         window.location.reload();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        alert("Đã có lỗi xảy ra");
+        console.log(error);
+      });
   };
   render() {
-    const { data } = this.state;
+    const { data, loading } = this.state;
     return (
       <Container style={{ marginTop: 30, marginBottom: 30 }}>
         {this.state.data ? (
@@ -92,11 +98,15 @@ class Profile extends Component {
             <Grid item xs={12} xl={8}>
               <h3>Danh sách các chương trình</h3>
               <Grid container spacing={3}>
-                {this.state.data && this.state.data.campaigns
-                  ? this.state.data.campaigns.campaign.map((item) => {
-                      return <Item data={item} isControl={true} />;
-                    })
-                  : "Nhà tài trợ chưa đăng chiến dịch nào"}
+                {loading ? (
+                  <Loading message={true} />
+                ) : this.state.data && this.state.data.campaigns ? (
+                  this.state.data.campaigns.campaign.map((item) => {
+                    return <Item data={item} isControl={true} />;
+                  })
+                ) : (
+                  "Nhà tài trợ chưa đăng chiến dịch nào"
+                )}
               </Grid>
             </Grid>
           </Grid>

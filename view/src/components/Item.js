@@ -77,12 +77,18 @@ const Item = ({ data, isControl }) => {
           </div>
         ) : (
           <Button size="small" color="primary" variant="outlined">
-            <FacebookIcon /> Chia sẻ
+            <a
+              className="route-link"
+              href={`https://www.facebook.com/sharer/sharer.php?u=http://donobox.me/donobox/campagin/${data.id}`}
+            >
+              {" "}
+              <FacebookIcon style={{ fontSize: 18 }} /> Chia sẻ
+            </a>
           </Button>
         )}
-        <Button size="small" color="secondary">
+        <Button size="small" variant="contained" color="secondary">
           <Link className="route-link" to={`/campaign/${data.id}`}>
-            Xem chương trình
+            Xem ngay
           </Link>
         </Button>
       </CardActions>
