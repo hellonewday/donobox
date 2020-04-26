@@ -62,6 +62,9 @@ module.exports.getUser = async (req, res, next) => {
           email: doc.email,
           id: doc._id,
           avatar: doc.avatarUrl,
+          website: doc.website,
+          phoneNumber: doc.phoneNumber,
+          location: doc.location,
           campaigns: {
             counts: doc.campaigns.length,
             campaign: doc.campaigns.map((cam) => {

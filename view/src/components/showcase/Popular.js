@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import "../../App.css";
 import Axios from "axios";
 import Loading from "../Loading";
+import { Link } from "react-router-dom";
 
 class Popular extends Component {
   state = {
@@ -42,7 +43,9 @@ class Popular extends Component {
         ) : (
           <DataSlider data={this.state.data} />
         )}
-        <Button className="button-more">Xem thêm</Button>
+        <Button className="button-more">
+          <Link className="route-link" to="/campaigns">Xem thêm</Link>
+        </Button>
       </div>
     );
   }

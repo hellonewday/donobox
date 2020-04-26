@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import "../../App.css";
 import Axios from "axios";
 import Loading from "../Loading";
+import { Link } from "react-router-dom";
 
 class NearYou extends Component {
   state = {
@@ -20,7 +21,7 @@ class NearYou extends Component {
       .catch((error) => console.log(error.response));
   }
   render() {
-    const {loading} = this.state;
+    const { loading } = this.state;
     return (
       <div style={{ marginTop: 40 }}>
         <h2 style={{ textAlign: "center", marginBottom: 6 }}>
@@ -42,7 +43,12 @@ class NearYou extends Component {
         ) : (
           <DataSlider data={this.state.data} />
         )}
-        <Button className="button-more">Xem thêm</Button>
+        <Button className="button-more">
+          {" "}
+          <Link className="route-link" to="/campaigns">
+            Xem thêm
+          </Link>
+        </Button>
       </div>
     );
   }
