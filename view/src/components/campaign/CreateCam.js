@@ -149,6 +149,7 @@ class CreateCam extends Component {
                   id="loai-chien-dich"
                   value={this.state.campaign_type || ""}
                   name="campaign_type"
+                  variant="outlined"
                   onChange={this.handleChange}
                 >
                   <MenuItem value={"Từ thiện"}>Từ thiện</MenuItem>

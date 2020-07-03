@@ -137,11 +137,10 @@ class Detail extends Component {
       this.state.comment
     )
       .then((response) => {
-        console.log(response.data);
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error.response);
+        alert("Có lỗi đã xảy ra");
       });
   };
   render() {
@@ -172,7 +171,7 @@ class Detail extends Component {
               <div style={{ marginTop: 20 }}>
                 <a
                   target="_blank"
-                  rel="noopener noreferrer" 
+                  rel="noopener noreferrer"
                   href={`https://www.facebook.com/sharer/sharer.php?u=http://donobox.me/donobox/campagin/${data.id}`}
                   className="route-link"
                 >

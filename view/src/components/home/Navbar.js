@@ -117,10 +117,7 @@ export default function Nabar() {
               ""
             )}
             <Button variant="contained" className="button-search">
-              <Link
-                className="route-link"
-                to={window.localStorage.getItem("token") ? "/create" : "/auth"}
-              >
+              <Link className="route-link" to={isUser ? "/create" : "/auth"}>
                 {isUser ? "Đăng ký tài trợ" : "Đăng ký tài khoản"}
               </Link>
             </Button>

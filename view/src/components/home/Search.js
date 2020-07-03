@@ -13,13 +13,11 @@ export default class SearchBar extends Component {
   };
   handleClick = (e) => {
     e.preventDefault();
-    console.log(this.state);
     Axios.get(
       `https://donobox.herokuapp.com/api/campaigns?search=${this.state.name}`
     )
       .then((response) => {
         this.setState({ data: [] });
-        console.log(response.data);
         this.setState({ data: response.data.data });
         if (response.data.data.length === 0) alert("Không có kết quả");
       })

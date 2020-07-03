@@ -11,7 +11,7 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
-const Item = ({ data, isControl }) => {
+const Item = ({ data, isControl, userid }) => {
   const deleteCams = (id) => {
     console.log(id);
     const configs = {
@@ -58,14 +58,6 @@ const Item = ({ data, isControl }) => {
       <CardActions>
         {isControl ? (
           <div>
-            {/* <Button
-              size="small"
-              color="primary"
-              variant="outlined"
-              style={{ marginRight: 10 }}
-            >
-              <BuildIcon /> Sửa
-            </Button> */}
             <Button
               onClick={() => deleteCams(data.id)}
               size="small"

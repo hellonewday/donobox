@@ -94,7 +94,12 @@ class Profile extends Component {
                   <img src={this.state.data.avatar} />
                 </div>
                 <div class="upload-btn-wrapper">
-                  <button class="btn">Tải ảnh cá nhân</button>
+                  {window.localStorage.getItem("id") ===
+                  this.props.match.params.id ? (
+                    <button class="btn">Tải ảnh cá nhân</button>
+                  ) : (
+                    ""
+                  )}
                   <input
                     type="file"
                     name="name"
@@ -119,49 +124,54 @@ class Profile extends Component {
                 </div>
               </div>
               <hr />
-              <div className="profile-links">
-                <Link to={`/edit/profile/${data._id}`} className="route-link">
-                  <EditIcon style={{ marginTop: 6 }} /> Chỉnh sửa thông tin tài
-                  khoản
-                </Link>
-                <Button
-                  color="secondary"
-                  variant="contained"
-                  onClick={this.handleOpen}
-                >
-                  <HighlightOffIcon />
-                  Xóa tài khoản
-                </Button>
-                <Dialog
-                  open={open}
-                  TransitionComponent={Transition}
-                  keepMounted
-                  onClose={this.handleClose}
-                  aria-labelledby="alert-dialog-slide-title"
-                  aria-describedby="alert-dialog-slide-description"
-                >
-                  <DialogTitle id="alert-dialog-slide-title">
-                    {"Xác nhận xóa tài khoản"}
-                  </DialogTitle>
-                  <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description">
-                      Bạn có muốn <b>xóa tài khoản</b>?
-                    </DialogContentText>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
-                      Hủy
-                    </Button>
-                    <Button
-                      onClick={this.handleDelete}
-                      color="secondary"
-                      variant="contained"
-                    >
-                      Xóa
-                    </Button>
-                  </DialogActions>
-                </Dialog>
-              </div>
+              {window.localStorage.getItem("id") ===
+              this.props.match.params.id ? (
+                <div className="profile-links">
+                  <Link to={`/edit/profile/${data._id}`} className="route-link">
+                    <EditIcon style={{ marginTop: 6 }} /> Chỉnh sửa thông tin
+                    tài khoản
+                  </Link>
+                  <Button
+                    color="secondary"
+                    variant="contained"
+                    onClick={this.handleOpen}
+                  >
+                    <HighlightOffIcon />
+                    Xóa tài khoản
+                  </Button>
+                  <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-slide-title"
+                    aria-describedby="alert-dialog-slide-description"
+                  >
+                    <DialogTitle id="alert-dialog-slide-title">
+                      {"Xác nhận xóa tài khoản"}
+                    </DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-slide-description">
+                        Bạn có muốn <b>xóa tài khoản</b>?
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={this.handleClose} color="primary">
+                        Hủy
+                      </Button>
+                      <Button
+                        onClick={this.handleDelete}
+                        color="secondary"
+                        variant="contained"
+                      >
+                        Xóa
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </div>
+              ) : (
+                ""
+              )}
             </Grid>
             <Grid item xs={12} xl={8}>
               <h3>Danh sách các chương trình</h3>
@@ -170,7 +180,17 @@ class Profile extends Component {
                   <Loading message={true} />
                 ) : this.state.data && this.state.data.campaigns ? (
                   this.state.data.campaigns.campaign.map((item) => {
-                    return <Item data={item} isControl={true} />;
+                    return (
+                      <Item
+                        data={item}
+                        isControl={
+                          this.props.match.params.id ===
+                          window.localStorage.getItem("id")
+                            ? true
+                            : false
+                        }
+                      />
+                    );
                   })
                 ) : (
                   "Nhà tài trợ chưa đăng chiến dịch nào"
